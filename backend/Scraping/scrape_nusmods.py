@@ -1,5 +1,9 @@
 import os, json, requests, re, csv, PyPDF2
 
+"""
+TODO: Automate downloading of course info pdf
+"""
+
 
 def get_NUS_course_info(course_code):
     """
