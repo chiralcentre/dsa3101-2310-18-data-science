@@ -1,7 +1,7 @@
-import os, json, requests, re, csv
+import requests, re
 
 """
-TODO: Regex prereq, parse prereq
+TODO: parse prereq
 """
 
 
@@ -62,17 +62,24 @@ def get_NTU_course_info(major_code, year):
 
     content = content.replace("&nbsp", chr(0))  # A non-printable char to act as separator between courses
 
+    output = {}
     for match in re.finditer(NTU_pattern, content):
-        course_code, course_name, course_info = match.group(1), match.group(2), match.group(4)
+        course_code, course_name, course_description = match.group(1), match.group(2), match.group(4)
+        output[course_code] = [course_code]
+        output[course_code].append(course_name)
+        output[course_code].append(course_description)
+        output[course_code].append([])
         print(course_code, course_name)
         for prereq_match in re.finditer(prereq_pattern, match.group(3)):
-            print(prereq_match.group(1))
+            output[course_code][-1].append(prereq_match.group(1))
+
+    return output
 
 
-
-
-output = [["School", "Major", "Course_Code", "Course_Name", "Course_Description", "Prereq_Tree"]]
-
-major_links = [row for row in csv.reader(open("./data/majors_links.csv", 'r'))]
-
-get_NTU_course_info("DSAI", 2)
+def scrape_ntu(school, major, link):
+    print(school, major)
+    output = {}
+    for year in range(1,5):
+        for k,v in get_NTU_course_info(link, year).items():
+            output[k] = [school, major] + v
+    return list(output.values())
