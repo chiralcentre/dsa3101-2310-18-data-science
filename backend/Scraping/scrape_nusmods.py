@@ -1,4 +1,8 @@
-import os, json, requests, re, csv, PyPDF2
+import os, json, requests, re, PyPDF2
+
+"""
+TODO: Automate downloading of course info pdf
+"""
 
 
 def get_NUS_course_info(course_code):
@@ -15,13 +19,12 @@ def get_NUS_course_info(course_code):
             "course_description": data["description"],
             'prereqTree': data.get('prereqTree', "")}
 
-# Regex pattern: 2 or 3 letters, then 4 numbers, then 1 optional letter. Followed by space and then other words
-NUS_pattern = "([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]?) +\w+"
 
-output = [["School", "Major", "Course_Code", "Course_Name", "Course_Description", "Prereq_Tree"]]
+def scrape_nus(school, major, link):
+    # Regex pattern: 2 or 3 letters, then 4 numbers, then 1 optional letter. Followed by space and then other words
+    NUS_pattern = "([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]?) +\w+"
 
-major_links = [row for row in csv.reader(open("./data/majors_links.csv", 'r'))]
-for school, major, link in filter(lambda x:x[0]=="NUS", major_links):
+    output = []
     print(school, major)
     content = ""
 
@@ -31,7 +34,6 @@ for school, major, link in filter(lambda x:x[0]=="NUS", major_links):
         content = content.replace(" ", " ")   # replace weird space character
     else:  # Major details is on the website
         content = requests.get(link).text
-
 
     course_codes = dict()   # Ordered and prevents duplicates
     for match in re.finditer(NUS_pattern, content):
@@ -45,6 +47,4 @@ for school, major, link in filter(lambda x:x[0]=="NUS", major_links):
             print(f"Error getting course information for {course_code} due to {e}")
             continue
 
-with open("./data/module_details.csv", "w", newline='') as f:
-    writer = csv.writer(f)
-    writer.writerows(output)
+    return output
