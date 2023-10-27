@@ -1,4 +1,7 @@
 import os, json, requests, re, PyPDF2
+import time
+
+from selenium import webdriver
 
 """
 TODO: Automate downloading of course info pdf
@@ -22,7 +25,7 @@ def get_NUS_course_info(course_code):
 
 def scrape_nus(school, major, link):
     # Regex pattern: 2 or 3 letters, then 4 numbers, then 1 optional letter. Followed by space and then other words
-    NUS_pattern = "([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]?) +\w+"
+    NUS_pattern = "([A-Z]{2,3}[0-9]{4}[a-zA-Z]?) +\w+"
 
     output = []
     print(school, major)
@@ -32,8 +35,15 @@ def scrape_nus(school, major, link):
         for page in PyPDF2.PdfReader(open(f"./data/majors_info/{school}_{major}.pdf", "rb")).pages:
             content += page.extract_text()
         content = content.replace(" ", " ")   # replace weird space character
+    elif major == "CHS":
+        driver = webdriver.Chrome()
+        driver.get(link)
+        time.sleep(4)  # Load page
+        content = driver.page_source
+        driver.close()
     else:  # Major details is on the website
         content = requests.get(link).text
+    content = content.replace("/", " ")  # Detect "COS1000/COS2000" format
 
     course_codes = dict()   # Ordered and prevents duplicates
     for match in re.finditer(NUS_pattern, content):
@@ -48,3 +58,9 @@ def scrape_nus(school, major, link):
             continue
 
     return output
+
+
+if __name__ == '__main__':
+    # Testing
+    chs_link = "https://chs.nus.edu.sg/programmes/common-curriculum/digital-literacy/"
+    print(scrape_nus("","CHS",chs_link))
