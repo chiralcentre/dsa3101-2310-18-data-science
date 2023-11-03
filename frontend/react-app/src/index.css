@@ -124,6 +124,52 @@ h2 {
   margin-bottom: 2rem;
 }
 
+
+/* COMPARE */
+
+.compare-dropdown form{
+  display: inline-block; 
+}
+
+.compare-button {
+  text-align: center;
+  padding-top: 300px;
+}
+
+.dropdown1 select, .dropdown2 select{
+  width : 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block; 
+}
+
+.dropdown1 form{
+  float: left;
+  padding-left: 20px;
+  padding-top: 100px;
+}
+
+.dropdown2 form{
+  float: right;
+  padding-right: 20px;
+  padding-top: 100px;
+}
+
+.result {
+  display : flex;
+  justify-content: space-around;
+  
+}
+
+.chart {
+  width: 40%;
+  height: 40%;
+}
+
+
+
 /* ===================================================================== */
 .quiz {
   display: flex;
@@ -337,3 +383,4 @@ h2 {
   background-color: #106698;
   color: white;
 }
+
