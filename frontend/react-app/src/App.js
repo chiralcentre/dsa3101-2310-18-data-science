@@ -3,15 +3,16 @@ import Home from "./components/Home";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Overview from "./components/Overview";
 import Compare from "./components/Compare";
-import Quiz from "./components/Quiz";
-import About from "./components/About";
 
 import NUS from "./components/NUS";
 import NTU from "./components/NTU";
 import SMU from "./components/SMU";
 
-import QuizQuestions from "./components/QuizQuestions";
-import QuizResult from "./components/QuizResult";
+import Quiz from "./components/Quiz/Quiz";
+import QuizQuestions from "./components/Quiz/QuizQuestions";
+import QuizResult from "./components/Quiz/QuizResult";
+
+import About from "./components/About";
 import Footer from "./components/Footer";
 
 function App() {

@@ -1,4 +1,4 @@
-import questions from './data/QuestionsDb.json';
+import questions from '../data/QuestionsDb.json';
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
  
@@ -38,11 +38,6 @@ const QuizQuestions = () => {
 
         setNum(Math.min(maxNum, num + 1));
       }
-    
-    //question && console.log(question)
-    //options && console.log(options)
-
-    
 
     return (
         <div className="quiz-questions">
