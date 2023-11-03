@@ -1,0 +1,31 @@
+{
+    "questions" : [
+        {
+            "question": "When faced with a problem, what approach best describes you?",
+            "options": [
+                "Break the problem and solve smaller parts first",
+                "Talk to others for inputs to solve the problems",
+                "I am not sure..."
+            ],
+            "id": 1
+        },
+        {
+            "question": "How do you feel about working with numbers and statistics?",
+            "options": [
+                "I find them fascinating and enjoy working with them",
+                "I prefer talking to others and making decisions based on their input.",
+                "I am not sure..."
+            ],
+            "id": 2
+        },
+        {  
+            "question": "When learning something new, which approach do you find more appealing?",
+            "options": [
+                "I like diving into the details and understanding the 'why' behind things",
+                "I prefer learning practical skills and techniques",
+                "I am not sure..."
+            ],
+            "id": 3
+        }
+    ]
+}   

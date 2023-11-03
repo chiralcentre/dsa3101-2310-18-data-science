@@ -5,7 +5,9 @@ import Overview from "./components/Overview";
 import Compare from "./components/Compare";
 import Quiz from "./components/Quiz";
 import About from "./components/About";
-
+import QuizQuestions from "./components/QuizQuestions";
+import QuizResult from "./components/QuizResult";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,13 +23,20 @@ function App() {
         <Route path="/compare">
           <Compare />
         </Route>
-        <Route path="/quiz">
+        <Route exact path="/quiz">
           <Quiz />
+        </Route>
+        <Route path="/quiz/questions">
+          <QuizQuestions />
+        </Route>
+        <Route path="/quiz/result">
+          <QuizResult />
         </Route>
         <Route path="/about">
           <About />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
