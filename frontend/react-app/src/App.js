@@ -7,7 +7,7 @@ import Quiz from "./components/Quiz";
 import About from "./components/About";
 import QuizQuestions from "./components/QuizQuestions";
 import QuizResult from "./components/QuizResult";
-
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
           <About />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
