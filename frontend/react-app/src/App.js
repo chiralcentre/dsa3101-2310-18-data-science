@@ -5,6 +5,7 @@ import Overview from "./components/Overview";
 import Compare from "./components/Compare";
 import Quiz from "./components/Quiz";
 import About from "./components/About";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <About />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
