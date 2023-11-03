@@ -1,6 +1,7 @@
 import csv
 from scrape_nusmods import *
 from scrape_ntu import *
+from scrape_smu import *
 
 output = [["School", "Major", "Course_Code", "Course_Name", "Course_Description", "Prereq"]]
 
@@ -11,6 +12,8 @@ for school, major, link in major_links:
         output += scrape_nus(school, major, link)
     elif school == "NTU":
         output += scrape_ntu(school, major, link)
+    elif school == "SMU":
+        output += scrape_smu(school, major, link)
 
 
 with open("./data/module_details.csv", "w", newline='') as f:
