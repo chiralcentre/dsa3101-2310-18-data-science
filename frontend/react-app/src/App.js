@@ -5,6 +5,9 @@ import Overview from "./components/Overview";
 import Compare from "./components/Compare";
 import Quiz from "./components/Quiz";
 import About from "./components/About";
+import NUS from "./components/NUS";
+import NTU from "./components/NTU";
+import SMU from "./components/SMU";
 
 
 function App() {
@@ -27,6 +30,9 @@ function App() {
         <Route path="/about">
           <About />
         </Route>
+        <Route path="/NUS" component={NUS} />
+        <Route path="/NTU" component={NTU} />
+        <Route path="/SMU" component={SMU} />
       </Switch>
     </Router>
   );

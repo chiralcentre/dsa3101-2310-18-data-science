@@ -97,3 +97,110 @@ h2 {
   margin-bottom: 2rem;
 }
 
+/* OVERVIEW SECTION */
+.section-overview {
+  padding: 2.4rem 0 9.6rem 0;
+}
+
+.overview-header{
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.overview-header-text{
+  text-align: center;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-bottom: 10rem;
+  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 550;
+}
+
+.column-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  margin-bottom: 15rem;
+  text-align: center;
+}
+
+.button-text{
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1.6rem;
+  margin-bottom: 5rem;
+}
+
+.buttonContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0px;
+  margin-left: 24rem;
+  margin-right: 24rem;
+  text-align: center;
+}
+
+.button {
+  background-color: white;
+  border: 3px solid #106698;
+  color: #106698;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+/* UNIVERSITY SECTION*/
+.university {
+  padding: 2.4rem 0 9.6rem 0;
+}
+
+.university-header{
+  text-align: center;
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+.university-subheader{
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10rem;
+}
+
+.module-distribution{
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 6rem;
+}
+
+.modules{
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 4rem;
+}
+
+
+.module-list{
+  text-align: left;
+  font-size: 1rem;
+  margin-bottom: 6rem;
+  margin-left: 20rem;
+}
+
+.button-selected{
+  background-color: #106698;
+  border: 3px solid #106698;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+}
