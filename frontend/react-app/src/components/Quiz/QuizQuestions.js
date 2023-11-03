@@ -9,7 +9,6 @@ const QuizQuestions = () => {
     const [choices, setChoices] = useState({});
 
     const maxNum = questions.questions.length;
-    const currentChoice = choices[num];
     const history = useHistory(); 
     
     useEffect(() => {
@@ -42,15 +41,16 @@ const QuizQuestions = () => {
     return (
         <div className="quiz-questions">
             <h1>Question {num}</h1>
-            <h2>{question}</h2>
+            <h2>{ question }</h2>
             {options && options.map((opt, index) => (
-                <div key={ index } className='answer-box' onClick={() => handleOptionClick(index)}>
-                    <h4>{ opt }</h4>
+                <div
+                    key={index}
+                    className={`answer-box ${choices[num] === index ? 'selected' : ''}`}
+                    onClick={() => handleOptionClick(index)}
+                >
+                    <h4>{opt}</h4>
                 </div>
             ))}
-            {!(currentChoice === null) && (
-                <h3>Current choice: {currentChoice}</h3>
-            )}
             <div className="button-container">
                 <button className='back-button' onClick={() => handleButtons('back')}><h4>Back</h4></button>
                 {num === maxNum && (
