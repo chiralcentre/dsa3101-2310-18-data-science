@@ -5,10 +5,14 @@ import Overview from "./components/Overview";
 import Compare from "./components/Compare";
 import Quiz from "./components/Quiz";
 import About from "./components/About";
+
 import NUS from "./components/NUS";
 import NTU from "./components/NTU";
 import SMU from "./components/SMU";
 
+import QuizQuestions from "./components/QuizQuestions";
+import QuizResult from "./components/QuizResult";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,8 +28,14 @@ function App() {
         <Route path="/compare">
           <Compare />
         </Route>
-        <Route path="/quiz">
+        <Route exact path="/quiz">
           <Quiz />
+        </Route>
+        <Route path="/quiz/questions">
+          <QuizQuestions />
+        </Route>
+        <Route path="/quiz/result">
+          <QuizResult />
         </Route>
         <Route path="/about">
           <About />
@@ -34,6 +44,7 @@ function App() {
         <Route path="/NTU" component={NTU} />
         <Route path="/SMU" component={SMU} />
       </Switch>
+      <Footer />
     </Router>
   );
 }
