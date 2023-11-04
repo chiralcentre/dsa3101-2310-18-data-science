@@ -62,5 +62,12 @@ def scrape_nus(school, major, link):
 
 if __name__ == '__main__':
     # Testing
-    chs_link = "https://chs.nus.edu.sg/programmes/common-curriculum/digital-literacy/"
-    print(scrape_nus("","CHS",chs_link))
+    # chs_link = "https://chs.nus.edu.sg/programmes/common-curriculum/digital-literacy/"
+    # print(scrape_nus("","CHS",chs_link))
+    res = []
+    for i in range(100):
+        try:
+            res.append(get_NUS_course_info(f"DSA42{i}"))
+        except:
+            continue
+    print(res)
