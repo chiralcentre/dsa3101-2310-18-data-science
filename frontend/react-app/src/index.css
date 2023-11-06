@@ -367,6 +367,12 @@ h2 {
   background-color: #4285F4;
 }
 
+.option-box.selected:hover {
+  /* background-color: #1c5a8e;  */
+  color:rgb(207, 207, 207);
+  background: #295396;
+}
+
 .option-questions:hover {
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }

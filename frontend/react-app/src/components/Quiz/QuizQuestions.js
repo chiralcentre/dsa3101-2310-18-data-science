@@ -31,12 +31,18 @@ const QuizQuestions = () => {
         }   
     }
 
-    const handleOptionClick = (opt) => {
-        setChoices({
-          ...choices,
-          [num]: opt
-        });
-      }
+    const handleOptionClick = (opt, isChoiceAvailable) => {
+        if (isChoiceAvailable) {
+            const { [num]: removedChoice, ...updatedChoices } = choices;
+            setChoices(updatedChoices);
+        } else {
+            setChoices({
+              ...choices,
+              [num]: opt
+            });
+        }
+    }
+    
 
     return (
         <div className="quiz-questions">
@@ -45,15 +51,18 @@ const QuizQuestions = () => {
                 <div className="bar-1"/>
                 <div className="question-bar">{ question }</div> 
                 <div className="question-options">
-                    {options && options.map((opt, index) => (
+                    {options && options.map((opt, index) => {
+                        const isChoiceAvailable = choices[num] === index;
+                        return (
                         <div
-                            key={index}
+                            key={ index }
                             className={`option-box ${choices[num] === index ? 'selected' : ''}`}
-                            onClick={() => handleOptionClick(index)}
+                            onClick={() => handleOptionClick(index, isChoiceAvailable)}
                         >
                             { opt }
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>           
                 <div className="button-container">
                     <button className='button-1' onClick={() => handleButtons('back')}>Back</button>
