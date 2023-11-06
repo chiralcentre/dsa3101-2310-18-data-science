@@ -10,6 +10,8 @@ university_mappings = {"NUS": ["Data Science and Analytics", "Business Analytics
 
 job_types = ['Data Analyst', 'Data Scientist', 'Quantitative Researcher', 'Quantitative Analyst', 'Business Analyst']
 
+clusters = ["Math-based Optimization (ML)", "Mathematical and Statistical Analysis (Theory-based)", "Project Management", "Machine Learning"]
+
 '''
 courses_defaults = {"university": ["NUS", "NTU", "SMU"],
                     "major": ["Data Science and Analytics", "Business Analytics", "Quantitative Finance", "Statistics", "Data Science and Economics",
@@ -46,3 +48,13 @@ def jobs():
     else:
         return jsonify(df[df["job_type"] == job].to_json(orient = "records", index = False))
 
+@app.route("/quiz-questions", methods = ["GET"])
+def quiz_questions():
+    df = pd.read_csv("Questions/quiz_questions.csv")
+    limit = int(request.args.get('limit', default = len(df)))
+    limit = min(limit, len(df))
+    return jsonify(df.iloc[:limit].to_json(orient = "records", index = False))
+
+@app.route("/quiz-results", methods = ["GET"])
+def quiz_results():
+    pass
