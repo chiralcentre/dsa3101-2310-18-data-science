@@ -5,6 +5,8 @@ from gensim.models.doc2vec import TaggedDocument
 import nltk
 # Add to dockerfile
 # RUN [ "python", "-c", "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')" ]
+# RUN [ "wget", "-O scibert_uncased.tar", "https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/huggingface_pytorch/scibert_scivocab_uncased.tar" ]
+# RUN [ "tar", "-xvf", "scibert_uncased.tar" ]
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -15,6 +17,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.util import ngrams
 import torch
 from transformers import AutoTokenizer, AutoModel
+from transformers import BertTokenizer, BertModel
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -35,7 +38,7 @@ def embed_text(text, model, tokenizer):
 
 
 class Preprocess:
-    def __init__(self, data, sw_removal = False, stem = False, lem = False, ds_vocab = False):
+    def __init__(self, data, sw_removal=False, stem=False, lem=False, ds_vocab=False):
         """
         tokenize: Tokenize the corpus
         sw_removal: Removes stopwords
@@ -51,6 +54,9 @@ class Preprocess:
         self.stem = stem
         self.lem = lem
         self.ds_vocab = ds_vocab
+
+        # Remove rows with invalid/missing description (just whitespaces)
+        self.data = self.data[self.data["Course_Description"].apply(len) >= 10]
 
         # Descriptions are short. So the course name may contain important information as well
         self.data['Course_Description'] = self.data['Course_Name'] + " " + self.data['Course_Description']
@@ -89,7 +95,7 @@ class Preprocess:
 
         self.data['Course_Description'] = self.data['Course_Description'].apply(lambda sentence: ' '.join(sentence))
 
-    def get_tagged_data(self, ngram_max = 1, tokens_only=False):  # For doc2vec. Return tagged data for training and tokens only for inference
+    def get_tagged_data(self, ngram_max=1, tokens_only=False):  # For doc2vec. Return tagged data for training and tokens only for inference
         def process_sentence(sentence):
             output = []
             for i in range(1, ngram_max + 1):  # Apply ngram for n = 1,2,3...
@@ -97,41 +103,46 @@ class Preprocess:
             return output
 
         if tokens_only:
-            return self.data.apply(lambda row:process_sentence(row["Course_Description"]), axis=1)
-        return self.data.apply(lambda row:TaggedDocument(words=process_sentence(row["Course_Description"]), tags=[row.name]), axis=1)
+            return self.data.apply(lambda row: process_sentence(row["Course_Description"]), axis=1)
+        return self.data.apply(lambda row: TaggedDocument(words=process_sentence(row["Course_Description"]), tags=[row.name]), axis=1)
 
-    def count_vec(self, ngram_range = (1,1), max_features = None):
-        count_vec = CountVectorizer(ngram_range = ngram_range, max_features = max_features)
+    def count_vec(self, ngram_range=(1, 1), max_features=None):
+        count_vec = CountVectorizer(ngram_range=ngram_range, max_features=max_features)
         return count_vec.fit_transform(self.data["Course_Description"]).toarray()
 
-    def tfidf(self, ngram_range = (1,1), max_features = None):
-        tfidf = TfidfVectorizer(ngram_range = ngram_range, max_features = max_features)
+    def tfidf(self, ngram_range=(1, 1), max_features=None):
+        tfidf = TfidfVectorizer(ngram_range=ngram_range, max_features=max_features)
         return tfidf.fit_transform(self.data["Course_Description"]).toarray()
 
 
 class SciBERT_Model:
     def __init__(self, all_courses, all_jobs=None):
         for colname in ["School", "Major", "Course_Code", "Course_Name"]:
-            if colname not in all_courses.colnames.values:
+            if colname not in all_courses.columns.values:
                 raise Exception(f"Column {colname} is not found in courses data")
 
         all_courses["id"] = all_courses[["School", "Major", "Course_Code", "Course_Name"]].agg("_".join, axis=1)
         all_courses = all_courses.set_index("id")
         processed_data = Preprocess(all_courses, sw_removal=True, lem=True, ds_vocab=True)
-        tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
-        model = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
+        # tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')  # Download from internet
+        # model = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
+        tokenizer = BertTokenizer.from_pretrained('scibert_scivocab_uncased', do_lower_case=True)  # Read local model
+        model = BertModel.from_pretrained('scibert_scivocab_uncased')
         all_courses["scibert_vector"] = [embed_text(sentence, model, tokenizer).mean(1).detach().numpy().flatten() for
                                          sentence in processed_data.data["Course_Description"]]
+        self.all_courses = all_courses
 
 
-# for i, course in enumerate(all_courses.index):
-#     print(course)
-#
-#     BERT_dis = all_courses.apply(lambda row:[row.name, cosine_similarity(row["scibert_vector"], all_courses.loc[course, "scibert_vector"])], axis=1)
-#     BERT_dis = list(BERT_dis)
-#     BERT_dis.sort(key = lambda x:x[1], reverse=True)
-#     BERT_dis = BERT_dis[1:]  # Remove itself from list of distances (which has cos distance 1)
-#     threshold = 0.8
-#     print("SciBERT cosine similarity:", list(filter(lambda x: x[1] > threshold, BERT_dis)))
-#     print("-----------------------------------------------------------------------------------------------------")
-#     if i>20: break
+if __name__ == '__main__':
+    mdl = SciBERT_Model(pd.read_csv('Scraping/data/module_details_labelled.csv'))
+    for i, course in enumerate(mdl.all_courses.index):
+        print(course)
+
+        BERT_dis = mdl.all_courses.apply(lambda row:[row.name, cosine_similarity(row["scibert_vector"], mdl.all_courses.loc[course, "scibert_vector"])], axis=1)
+        BERT_dis = list(BERT_dis)
+        BERT_dis.sort(key = lambda x:x[1], reverse=True)
+        BERT_dis = BERT_dis[1:]  # Remove itself from list of distances (which has cos distance 1)
+        threshold = 0.9
+        print("SciBERT cosine similarity:", list(filter(lambda x: x[1] > threshold, BERT_dis)))
+        print("-----------------------------------------------------------------------------------------------------")
+        if i>20: break
