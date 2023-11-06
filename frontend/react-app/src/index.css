@@ -275,8 +275,6 @@ h2 {
   height: 40%;
 }
 
-
-
 /* ===================================================================== */
 
 .quiz-start {
@@ -323,8 +321,8 @@ h2 {
 .bar-1 {
   align-self: center;
   width: 90%;
-  height: 3px; 
-  background-color: #666b85;
+  height: 25px; 
+  background-color: #757b98;
 }
 
 .question-bar {
@@ -389,7 +387,9 @@ h2 {
 .button-start, 
 .button-1,
 .button-2,
-.button-3 {
+.button-3,
+.button-4,
+.button-5 {
   color:white;
   font-weight: bold;
   line-height: 1.5;
@@ -412,6 +412,65 @@ h2 {
 .button-3:hover {
   color:rgb(207, 207, 207);
   background: #295396;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background: #E7EFFF;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+}
+
+.modal-img {
+  margin-top:-32%;
+  padding-bottom: 12px;
+  width: 100px;
+  height: 100px;
+}
+.modal h2 {
+  font-family: Raleway;
+  font-weight: bold;
+}
+
+.modal p {
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 14px;
+  padding : 0px 20px 20px 20px;
+}
+
+.button-4 {
+  width:210px;
+  background-color: #ED9623;
+}
+
+.button-4:hover {
+  color:rgb(207, 207, 207);
+  background: rgb(169, 100, 10);
+}
+
+.button-5 {
+  width:210px;
+  background-color: #45A834;
+}
+
+.button-5:hover {
+  color:rgb(207, 207, 207);
+  background-color: #337d26;
 }
 
 .foot-note {

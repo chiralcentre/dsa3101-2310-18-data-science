@@ -7,6 +7,7 @@ const QuizQuestions = () => {
     const [question, setQuestion] = useState(null);
     const [options, setOptions] = useState(null);
     const [choices, setChoices] = useState({});
+    const [modalVisible, setModalVisible] = useState(false);
 
     const maxNum = questions.questions.length;
     const history = useHistory(); 
@@ -23,12 +24,12 @@ const QuizQuestions = () => {
         } else if (state === 'next') {
             setNum(Math.min(maxNum, num + 1));
         } else if (state === 'submit') {
-            if (Object.keys(choices).length === maxNum) {
-                history.push('/quiz/result');
-            } else {
-                alert('Please answer all questions before submitting.');
-            }
-        }   
+            setModalVisible(true);
+        } else if (state === 'closeModal') {
+            setModalVisible(false);
+        } else if (state === 'success') {
+            history.push('/quiz/result')
+        }
     }
 
     const handleOptionClick = (opt, isChoiceAvailable) => {
@@ -42,7 +43,6 @@ const QuizQuestions = () => {
             });
         }
     }
-    
 
     return (
         <div className="quiz-questions">
@@ -74,6 +74,26 @@ const QuizQuestions = () => {
                     )}
                 </div>  
                 <div className="foot-note"> { num } of { maxNum } Questions</div> 
+                
+                {modalVisible && (
+                    Object.keys(choices).length === maxNum ? (
+                        <div className="modal">
+                            <div className="modal-container">
+                                <img src="/img/Checklist.png" alt="" className='modal-img'/>
+                                <p>Your respond has been<br />submitted.</p>
+                                <button className='button-5' onClick={() => handleButtons('success')}>See your result!</button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="modal">
+                            <div className="modal-container">
+                                <img src="/img/Alert.png" alt="" className='modal-img'/>
+                                <p>Please answer all questions<br />before submitting.</p>
+                                <button className='button-4' onClick={() => handleButtons('closeModal')}>Back</button>
+                            </div>
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );
