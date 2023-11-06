@@ -7,6 +7,9 @@ app = Flask(__name__)
 university_mappings = {"NUS": ["Data Science and Analytics", "Business Analytics", "Quantitative Finance", "Statistics", "Data Science and Economics", "CHS"],
                     "NTU": ["Data Science and Artificial Intelligence", "Economics and Data Science"],
                     "SMU": ["Data Science and Analytics", "Quantitative Finance", "Information Systems (Business Analytics)"]}
+
+job_types = ['Data Analyst', 'Data Scientist', 'Quantitative Researcher', 'Quantitative Analyst', 'Business Analyst']
+
 '''
 courses_defaults = {"university": ["NUS", "NTU", "SMU"],
                     "major": ["Data Science and Analytics", "Business Analytics", "Quantitative Finance", "Statistics", "Data Science and Economics",
@@ -31,5 +34,15 @@ def modules():
     else:
         return jsonify(df[(df["School"] == uni) & (df["Major"] == major)].to_json(orient = "records", index = False))
 
-    
+@app.route("/jobs", methods = ["GET"])
+def jobs():
+    df = pd.read_pickle("Scraping/data/job_offers_categorized.pkl")
+    # if no job is specified, return everything
+    job = request.args.get("job", None)
+    if job == None:
+        return jsonify(df.to_json(orient = "records", index = False))
+    elif job not in job_types:
+        return make_response(f"job {job} not found", 400)
+    else:
+        return jsonify(df[df["job_type"] == job].to_json(orient = "records", index = False))
 
