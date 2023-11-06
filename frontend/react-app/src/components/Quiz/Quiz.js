@@ -8,10 +8,10 @@ const Quiz = () => {
     }
 
     return (  
-        <div className="quiz">
-            <h2>Find out your best course!</h2>
+        <div className="quiz-start">
+            <div>Find out your best course!</div>
             <img src="img/DataScientist.png" alt="" className="quiz-front" />
-            <button onClick={handleClick}>Start Now!</button>
+            <button onClick={handleClick} className="button-start">Start Quiz</button>
         </div>
     );
 }

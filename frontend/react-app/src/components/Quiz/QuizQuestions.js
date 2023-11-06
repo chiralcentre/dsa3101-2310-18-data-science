@@ -20,6 +20,8 @@ const QuizQuestions = () => {
     const handleButtons = (state) => {
         if (state === 'back') {
             setNum(Math.max(1, num - 1));
+        } else if (state === 'next') {
+            setNum(Math.min(maxNum, num + 1));
         } else if (state === 'submit') {
             if (Object.keys(choices).length === maxNum) {
                 history.push('/quiz/result');
@@ -34,28 +36,35 @@ const QuizQuestions = () => {
           ...choices,
           [num]: opt
         });
-
-        setNum(Math.min(maxNum, num + 1));
       }
 
     return (
         <div className="quiz-questions">
-            <h1>Question {num}</h1>
-            <h2>{ question }</h2>
-            {options && options.map((opt, index) => (
-                <div
-                    key={index}
-                    className={`answer-box ${choices[num] === index ? 'selected' : ''}`}
-                    onClick={() => handleOptionClick(index)}
-                >
-                    <h4>{opt}</h4>
-                </div>
-            ))}
-            <div className="button-container">
-                <button className='back-button' onClick={() => handleButtons('back')}><h4>Back</h4></button>
-                {num === maxNum && (
-                    <button className='submit-button' onClick={() => handleButtons('submit')}><h4>Submit</h4></button>
-                )}
+            <div className="quiz-page">
+                <div className="question-headline">Question {num}</div>
+                <div className="bar-1"/>
+                <div className="question-bar">{ question }</div> 
+                <div className="question-options">
+                    {options && options.map((opt, index) => (
+                        <div
+                            key={index}
+                            className={`option-box ${choices[num] === index ? 'selected' : ''}`}
+                            onClick={() => handleOptionClick(index)}
+                        >
+                            { opt }
+                        </div>
+                    ))}
+                </div>           
+                <div className="button-container">
+                    <button className='button-1' onClick={() => handleButtons('back')}>Back</button>
+                    { num === maxNum && (
+                        <button className='button-2' onClick={() => handleButtons('submit')}>Submit</button>
+                    )}
+                    { num !== maxNum && (
+                        <button className='button-3' onClick={() => handleButtons('next')}>Next</button>
+                    )}
+                </div>  
+                <div className="foot-note"> { num } of { maxNum } Questions</div>        
             </div>
         </div>
     );

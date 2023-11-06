@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap');
 
-
 /* base styles */
 * {
   margin: 0;
@@ -280,82 +279,153 @@ h2 {
 
 /* ===================================================================== */
 
-.quiz {
+.quiz-start {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh; /* Take up the full height of the viewport */
 }
 
-.quiz img {
+.quiz-start img {
   width: 400px; 
   height: 375px; 
 }
 
 .quiz-questions {
+  /* background-color: rgba(164,221,255,1); */
+  background-color: #ADBBF2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+}
+
+.quiz-page {
+  border-radius: 5px;
+  background-color:#E7EFFF;
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100vh;
-  text-align: center;
+  width: 500px;
+  height: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid #a3a3a3;
 }
 
-.quiz-questions h1 { 
-  margin-top: 70px;
+.question-headline {
+  padding:  20px 0px 10px 20px;
+  font-family: Raleway;
+  font-size: 24px;
+  font-weight: bold;
+  color: #434656;
 }
 
-.quiz-questions h2 { 
-  padding: 20px;
-  margin-bottom: 10px;
+.bar-1 {
+  align-self: center;
+  width: 90%;
+  height: 3px; 
+  background-color: #666b85;
 }
 
-.quiz-questions h4,
-.back-button h4,
-.submit-button h4 { 
-  font-size: 18px;
-  color: white;
+.question-bar {
+  padding: 15px 20px 20px 25px;
+  font-weight: bold;
+  font-family: Helvetica;
+  color: #434656;
 }
 
-.answer-box {
+.question-options {
+  padding: 0px 20px 20px 20px;
+  max-height: 48%;
+}
+
+.option-box {
+  color: #434656;
+  display: flex;
+  padding: 0px 15px 0px 15px;
+  align-items: center;
+  height: 67px;
   border-radius: 5px;
-  width: 100%;
-  max-width: 500px; 
-  padding: 25px 20px; 
-  margin-bottom: 15px; 
-  border: none;
-  outline: none;
+  margin-bottom: 10px; 
   cursor: pointer;
-  background-color: #2980b9; 
+  font-family: Helvetica;
+  border: 1px solid #a3a3a3;
+  /* background-color: rgb(90, 119, 246); rgb(66, 133, 244); */
   transition: background-color 0.3s, box-shadow 0.3s; /* Add a transition for both background color and box shadow */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
 }
 
-.answer-box:hover {
-  background-color: #1c5a8e; 
+.option-box:hover {
+  /* background-color: #1c5a8e;  */
+  color:white;
+  background-color: #4285F4;
 }
 
-.answer-box.selected {
-  background-color: #1c5a8e; 
+.option-box.selected {
+  /* background-color: #1c5a8e;  */
+  color:white;
+  background-color: #4285F4;
 }
 
-.quiz-questions:hover {
+.option-questions:hover {
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-.back-button,
-.submit-button {
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Place buttons at the beginning, between, and at the end of the container */
+  align-items: center; /* Vertically center buttons */
+  width: 92%; /* Ensure the buttons span the full width of the container */
+  height: 10%;
+  align-self: center;
+}
+
+.button-start, 
+.button-1,
+.button-2,
+.button-3 {
+  color:white;
+  font-weight: bold;
+  line-height: 1.5;
   width: 100px;
-  margin: 10px 30px;
   border-radius: 5px;
-  background-color: #2980b9;
-  text-align: center;
+  /* background-color: #2980b9; */
+  background-color: #4285F4;
   padding: 10px;
-  margin-bottom: 10px;
   border: none;
   outline: none;
   cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.3s, box-shadow 0.3s; /* Add a transition for both background color and box shadow */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
+.button-start:hover, 
+.button-1:hover,
+.button-2:hover,
+.button-3:hover {
+  color:rgb(207, 207, 207);
+  background: #295396;
+}
+
+.foot-note {
+  color: #434656;
+  font-weight: bold;
+  height: 100%;
+  padding: 11px 0px 0px 22px;
+  font-family: sans-serif;
+}
+
+/* ===================================================================== */
+.result-page {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #012;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
 /* ===================================================================== */
 
 .subtitle {

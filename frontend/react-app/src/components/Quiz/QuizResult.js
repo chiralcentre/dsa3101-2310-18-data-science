@@ -1,6 +1,7 @@
 const QuizResult = () => {
     return (
-        <h2>result</h2>
+        <div className="result-page">
+        </div>
     );
 }
  
