@@ -4,7 +4,6 @@ requests
 PyPDF2
 pandas
 numpy
-gensim
 nltk
 torch
 transformers
