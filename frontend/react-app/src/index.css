@@ -42,6 +42,7 @@ h2 {
   height: 2rem;
 }
 
+
 /* NAVIGATION */
 .main-nav-list {
   list-style: none;
@@ -235,46 +236,72 @@ h2 {
 
 /* COMPARE */
 
-.compare-dropdown form{
-  display: inline-block; 
+.compare-dropdown{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding-top: 100px;
 }
 
-.compare-button {
+#compare-button {
   text-align: center;
-  padding-top: 300px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 30px;
+  background: linear-gradient(to right, #EBAA73, #E3767E);
+  color: white;
 }
 
-.dropdown1 select, .dropdown2 select{
+.button-container {
+  padding-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown select{
   width : 100%;
   padding: 6px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block; 
+  border-radius: 20px;
+  background: linear-gradient(to right, #333389, #504ECC);
+  color: #fff;
 }
 
-.dropdown1 form{
-  float: left;
-  padding-left: 20px;
-  padding-top: 100px;
+.dropdown form{
+  display: inline-block;
+  margin: 0 20px;
+  height: 40px;
 }
 
-.dropdown2 form{
-  float: right;
-  padding-right: 20px;
-  padding-top: 100px;
-}
 
 .result {
   display : flex;
   justify-content: space-around;
-  
 }
 
 .chart {
   width: 40%;
   height: 40%;
 }
+
+.compare {
+  height: 150vh;
+}
+
+.compare h1 {
+  background: linear-gradient(to right, #1167D1, #FF4B4B);
+  color: #fff;
+  text-align: center;
+  margin-top: 30px;
+}
+
 
 
 
