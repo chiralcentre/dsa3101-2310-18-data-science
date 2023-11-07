@@ -240,6 +240,28 @@ class BERT_Model:
             return dict(result[:limit])  # Apply output limit
         return dict(result)
 
+    def compare_programs(self, school, program, min_similarity=0.93, course_types=()):
+        """
+        Compare program with all others. Returns courses from others with no similar (< min_similarity) in program.
+        Returns a list of [course_id, similarity score] that doesn't meet min_similarity with any course in program.
+        """
+        program_courses = self.all_courses.loc[(self.all_courses["School"] == school) & (self.all_courses["Major"] == program)]
+        if course_types:
+            selected_courses = self.all_courses[self.all_courses["Category"].isin(course_types)]
+        else:
+            selected_courses = self.all_courses
+
+        res = []
+        for i, course_id in enumerate(selected_courses.index):
+            BERT_dis = program_courses.apply(
+                lambda row: [row.name, cosine_similarity(row["bert_vector"], selected_courses.loc[course_id, "bert_vector"])], axis=1)
+            BERT_dis = list(BERT_dis)
+            max_similarity = max(x[1] for x in BERT_dis)
+            if max_similarity < min_similarity:
+                res.append([course_id, max_similarity])
+        res.sort(key=lambda x: x[1])  # courses with least similarity first
+        return res
+
 
 if __name__ == '__main__':  # Code for testing
     mdl = BERT_Model(pd.read_csv('Scraping/data/module_details_labelled.csv'), pd.read_csv('Scraping/data/job_offers_categorized.csv'))
@@ -272,5 +294,7 @@ Excited about, and have appreciation for, working with and managing multiple sta
     """
     # print(mdl.get_similar_courses_from_job_desc(test_job_desc, threshold=0.9))
 
-    print(mdl.get_similar_courses_from_job_type("Quantitative Researcher", limit=20, course_types=["Core", "Elective"]))
+    # print(mdl.get_similar_courses_from_job_type("Quantitative Researcher", limit=20, course_types=["Core", "Elective"]))
+
+    print(mdl.compare_programs("NUS", "Data Science and Analytics", course_types=["Core"]))
 
