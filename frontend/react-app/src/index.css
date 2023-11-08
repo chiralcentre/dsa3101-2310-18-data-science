@@ -620,16 +620,15 @@ NAVIGATION
   box-sizing: border-box;
   background: #012;
   height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex; /* Use Flexbox */
+  justify-content: center; /* Horizontally center the content */
 }
 
 .result-page {
   border-radius: 5px;
   background-color:#E7EFFF;
-  height: 100vh;
   width: 90%;
-  height: 80%;
+  height: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: 2px solid #a3a3a3;
 }
