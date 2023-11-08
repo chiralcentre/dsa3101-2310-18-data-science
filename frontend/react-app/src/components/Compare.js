@@ -31,7 +31,7 @@ const Compare = () => {
             } if (uni1 === "SMU") {
                 setCourseList1(["Quantitative Finance", "Data Science and Analytics", "Information Systems(Business Analytics)"])
                 setCourse1("Quantitative Finance")
-            }   
+            }
         } else if (dropdown === 2) {
             setUni2(e)
             setDisplay(false)
@@ -44,7 +44,7 @@ const Compare = () => {
             } if (uni2 === "SMU") {
                 setCourseList2(["Quantitative Finance", "Data Science and Analytics", "Information Systems(Business Analytics)"])
                 setCourse2("Quantitative Finance")
-            } 
+            }
         }
     }
 
@@ -61,22 +61,26 @@ const Compare = () => {
 
     // }, [display])
 
-    return (  
+    return (
         <div className="compare">
-            <h1>Compare your chosen programmes</h1>
+            <div className="compare-title">
+                <h1 className="heading-secondary">Compare Data Science Courses</h1>
+                <p className="subtitle-secondary">No more hassle in comparing data science courses from multiple resources. Try our comparison feature to discern the differences between two data science courses seamlessly.</p>
+            </div>
+
             <div className="compare-dropdown">
                 <div className="dropdown">
                     <form>
                         <label>University</label>
-                        <select value={uni1} onChange={(e) => {setUni1(e.target.value)}}>
+                        <select value={uni1} onChange={(e) => { setUni1(e.target.value) }}>
                             <option value="NUS">NUS</option>
                             <option value="NTU">NTU</option>
                             <option value="SMU">SMU</option>
                         </select>
-                        
+
                         <label>Course</label>
-                        <select value={course1} onChange={(e) => {setCourse1(e.target.value); setDisplay(false);}}>
-                            {courseList1.map((course) => (<option value={course}>{course}</option>))} 
+                        <select value={course1} onChange={(e) => { setCourse1(e.target.value); setDisplay(false); }}>
+                            {courseList1.map((course) => (<option value={course}>{course}</option>))}
                         </select>
                     </form>
                 </div>
@@ -84,35 +88,35 @@ const Compare = () => {
                 <div className="dropdown">
                     <form>
                         <label>University</label>
-                        <select value={uni2} onChange={(e) => {setUni2(e.target.value)}}>
+                        <select value={uni2} onChange={(e) => { setUni2(e.target.value) }}>
                             <option value="NUS">NUS</option>
                             <option value="NTU">NTU</option>
                             <option value="SMU">SMU</option>
                         </select>
-                        
+
                         <label>Course</label>
-                        <select value={course2} onChange={(e) => {setCourse2(e.target.value); setDisplay(false);}}>
-                        {courseList2.map((course) => (<option value={course}>{course}</option>))}
+                        <select value={course2} onChange={(e) => { setCourse2(e.target.value); setDisplay(false); }}>
+                            {courseList2.map((course) => (<option value={course}>{course}</option>))}
                         </select>
                     </form>
                 </div>
             </div>
 
             <div className="button-container">
-                <button id ='compare-button' onClick={() => handleClick()}>Compare!</button>
+                <button id='compare-button' className="btn btn--outline" onClick={() => handleClick()}>Compare</button>
             </div>
-              
-                    
-            {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2}/>}    
-            
-                
 
-                
+
+            {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2} />}
+
+
+
+
 
 
         </div>
-        
+
     );
 }
- 
+
 export default Compare;
