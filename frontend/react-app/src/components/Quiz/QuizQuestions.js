@@ -72,9 +72,7 @@ const QuizQuestions = () => {
                     { num !== maxNum && (
                         <button className='button-3' onClick={() => handleButtons('next')}>Next</button>
                     )}
-                </div>  
-                <div className="foot-note"> { num } of { maxNum } Questions</div> 
-                
+                </div>               
                 {modalVisible && (
                     Object.keys(choices).length === maxNum ? (
                         <div className="modal">
@@ -94,6 +92,7 @@ const QuizQuestions = () => {
                         </div>
                     )
                 )}
+                <div className="foot-note"> { num } of { maxNum } Questions</div> 
             </div>
         </div>
     );

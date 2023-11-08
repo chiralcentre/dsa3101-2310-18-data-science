@@ -1,14 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import LoadingAnimation from './LoadingAnimation';
+
 const QuizResult = () => {
-    return (
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+
+  const handleLoadingComplete = () => {
+    setIsLoadingComplete(true);
+  };
+
+  useEffect(() => {
+    // Scroll to the top of the page when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="quiz-result">
+      {isLoadingComplete ? (
         <div className="result-page">
-            <div className="loading-container">
-                <span className="loading-span loading-one"></span>
-                <span className="loading-span loading-two"></span>
-                <span className="loading-span loading-three"></span>
-                <span className="loading-span loading-four"></span>
-            </div>
+
         </div>
-    );
+      ) : (
+        <LoadingAnimation onLoadingComplete={handleLoadingComplete} />
+      )}
+    </div>
+  );
 }
- 
+
 export default QuizResult;
