@@ -63,9 +63,9 @@ const Compare = () => {
 
     return (  
         <div className="compare">
-            <h2>Compare your chosen programmes</h2>
+            <h1>Compare your chosen programmes</h1>
             <div className="compare-dropdown">
-                <div className="dropdown1">
+                <div className="dropdown">
                     <form>
                         <label>University</label>
                         <select value={uni1} onChange={(e) => {setUni1(e.target.value)}}>
@@ -81,7 +81,7 @@ const Compare = () => {
                     </form>
                 </div>
 
-                <div className="dropdown2">
+                <div className="dropdown">
                     <form>
                         <label>University</label>
                         <select value={uni2} onChange={(e) => {setUni2(e.target.value)}}>
@@ -95,14 +95,15 @@ const Compare = () => {
                         {courseList2.map((course) => (<option value={course}>{course}</option>))}
                         </select>
                     </form>
-
-                    <div className="compare-button">
-                        <button onClick={() => handleClick()}>Compare</button>
-                    </div>  
-                    
                 </div>
-                {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2}/>}    
             </div>
+
+            <div className="button-container">
+                <button id ='compare-button' onClick={() => handleClick()}>Compare!</button>
+            </div>
+              
+                    
+            {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2}/>}    
             
                 
 
