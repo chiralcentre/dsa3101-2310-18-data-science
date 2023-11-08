@@ -1,11 +1,8 @@
-import {NavLink} from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
             <header className="header">
-                {/* <a href="#">
-                    <img className="logo" alt="logo" src="img/logo.png" />
-                </a> */}
                 <h2 className="logo">DG.</h2>
 
                 <nav>
@@ -18,7 +15,6 @@ const Navbar = () => {
                     </ul>
                 </nav>
             </header>
-
     );
 }
 
