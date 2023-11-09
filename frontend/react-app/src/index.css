@@ -6,7 +6,7 @@
   margin: 0;
   font-family: "Raleway";
   color: #333;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 h2 {
@@ -275,7 +275,9 @@ h2 {
   font-weight: 600;
   line-height: 1.05;
   margin-top: 3rem;
+  font-size: 2.5rem;
 }
+
 
 .heading-subtitle {
   font-weight: 300;
@@ -314,7 +316,7 @@ h2 {
 
 /* OVERVIEW SECTION */
 .section-overview {
-  padding: 2.4rem 0 9.6rem 0;
+  /* padding: 2.4rem 0 9.6rem 0; */
 }
 
 .overview-header{
@@ -322,6 +324,12 @@ h2 {
   font-size: 4.5rem;
   margin-top: 5rem;
   margin-bottom: 1rem;
+}
+
+.overview-header-container {
+    background-color: #23377E;
+    padding: 2rem 0 4rem 0;
+    text-align: center;
 }
 
 .overview-header-text{
@@ -337,7 +345,7 @@ h2 {
 .overview-subheader{
   text-align: center;
   font-size: 1.8rem;
-  margin-top: 20rem;
+  /* margin-top: 20rem; */
   margin-bottom: 0.5rem;
 }
 
@@ -346,7 +354,7 @@ h2 {
   margin-left: 25rem;
   margin-right: 25rem;
   margin-bottom: 6rem;
-  line-height: 1.6;
+  /* line-height: 1.6; */
   font-weight: 550;
 }
 
@@ -354,6 +362,14 @@ h2 {
 .overview-inline-block{
   display: flex;
   align-items: center;
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.overview-subheader-container {
+  margin-top: 5rem;
+  
 }
 
 .overview-inline-item-1{
@@ -413,27 +429,27 @@ h2 {
 
 .overview-inline-text-1{
   text-align: left;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .overview-inline-text-2{
   text-align: right;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .overview-img1{
-  max-width: 120%;
-  max-height: 120%;
+  max-width: 170%;
+  max-height: 170%;
 }
 
 .overview-img2{
-  max-width: 140%;
-  max-height: 140%;
+  max-width: 170%;
+  max-height: 170%;
 }
 
 .overview-img3{
-  max-width: 160%;
-  max-height: 160%;
+  max-width: 200%;
+  max-height: 170%;
 }
 
 .overview-img4{
@@ -449,25 +465,33 @@ h2 {
 }
 
 .buttonContainer{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0px;
-  margin-left: 34rem;
-  margin-right: 34rem;
-  text-align: center;
-  margin-bottom: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  /* margin-left: 34rem;
+  margin-right: 34rem; */
+  /* text-align: center; */
+  /* margin-bottom: 12rem; */
 }
 
-.button-uni {
+.button-uni,
+.button-uni:link,
+.button-uni:visited {
+  display: inline-block;
   background-color: #DAE2FF;
   border: none;
   color: #23377E;
   padding: 10px 50px;
   text-decoration: none;
-  display: inline-block;
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 10%;
+  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
 .overview-job-header{
@@ -541,6 +565,37 @@ h2 {
   margin-right: 100px;
 }
 
+.btn,
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  /* font-size: 2rem; */
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s;
+  background-color:#715BB6;
+  color: white;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+.btn--form {
+  background-color: rgba(255, 255, 255, 0.97);
+  color: #555;
+  width: auto;
+  margin: 0 auto;
+  align-self: end;
+}
+
+.btn--form:hover {
+  background-color: #c5c6d0;
+  color: #555;
+}
+
 .button-course{
   background-color: #d2dbfe;
   width: 100%;
@@ -550,6 +605,15 @@ h2 {
   text-decoration: none;
   display: inline-block;
   margin-bottom: 40px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button-course:hover{
+  background-color: #c3cdf7;
+  color: #555;
 }
 
 .course-name{
@@ -583,6 +647,9 @@ h2 {
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 10%;
+  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
 /* COMPARE */
@@ -1094,23 +1161,6 @@ h2 {
   color: white;
   box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.2);
 }
-
-/* .btn-form, 
-.btn-form:link,
-.btn-form:visited {
-  /* display: inline-block; 
-  text-decoration: none;
-  /* font-size: 2rem; 
-  font-weight: 500;
-  padding: 10px 22px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.3s;
-  background-color:#fff;
-  color: #106698;
-} */
 
 .btn--form {
   background-color: rgba(255, 255, 255, 0.97);
