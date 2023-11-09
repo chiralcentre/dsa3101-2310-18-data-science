@@ -319,56 +319,183 @@ h2 {
 
 .overview-header{
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 4.5rem;
+  margin-top: 5rem;
+  margin-bottom: 1rem;
 }
 
 .overview-header-text{
   text-align: center;
-  margin-left: 20rem;
-  margin-right: 20rem;
-  margin-bottom: 10rem;
+  margin-left: 25rem;
+  margin-right: 25rem;
+  margin-bottom: 6rem;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 550;
 }
 
-.column-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-left: 10rem;
-  margin-right: 10rem;
-  margin-bottom: 15rem;
+.overview-subheader{
   text-align: center;
+  font-size: 1.8rem;
+  margin-top: 20rem;
+  margin-bottom: 0.5rem;
+}
+
+.overview-subheader-text{
+  text-align: center;
+  margin-left: 25rem;
+  margin-right: 25rem;
+  margin-bottom: 6rem;
+  line-height: 1.6;
+  font-weight: 550;
+}
+
+
+.overview-inline-block{
+  display: flex;
+  align-items: center;
+}
+
+.overview-inline-item-1{
+  margin-left: 100px;
+  padding-right: 100px;
+  margin-bottom: 100px;
+}
+
+.overview-inline-item-2{
+  float: right;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  padding-right: 100px;
+}
+
+
+
+.overview-inline-item-3{
+  float:left;
+  margin-left: 100px;
+  padding-right: 150px;
+  margin-bottom: 100px;
+}
+
+.overview-inline-item-4{
+  margin-right: 100px;
+  margin-bottom: 100px;
+}
+
+.overview-number-1{
+  font-weight:bolder;
+  font-size:5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 0rem;
+}
+
+.overview-number-2{
+  font-weight:bolder;
+  font-size:5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 0rem;
+  text-align: right;
+}
+
+.overview-cluster-header-1{
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.overview-cluster-header-2{
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.overview-inline-text-1{
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.overview-inline-text-2{
+  text-align: right;
+  font-size: 1.2rem;
+}
+
+.overview-img1{
+  max-width: 120%;
+  max-height: 120%;
+}
+
+.overview-img2{
+  max-width: 140%;
+  max-height: 140%;
+}
+
+.overview-img3{
+  max-width: 160%;
+  max-height: 160%;
+}
+
+.overview-img4{
+  max-width: 160%;
+  max-height: 160%;
 }
 
 .button-text{
   text-align: center;
   line-height: 1.6;
   font-size: 1.6rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 
 .buttonContainer{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0px;
-  margin-left: 24rem;
-  margin-right: 24rem;
+  margin-left: 34rem;
+  margin-right: 34rem;
   text-align: center;
+  margin-bottom: 12rem;
 }
 
-.button {
-  background-color: white;
-  border: 3px solid #106698;
-  color: #106698;
-  padding: 15px 32px;
+.button-uni {
+  background-color: #DAE2FF;
+  border: none;
+  color: #23377E;
+  padding: 10px 50px;
   text-decoration: none;
   display: inline-block;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 10%;
+}
+
+.overview-job-header{
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 8rem;
+  margin-bottom: 0.5rem;
+}
+
+.overview-job-text{
+  text-align: center;
+  margin-left: 25rem;
+  margin-right: 25rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  font-weight: 550;
+}
+
+.overview-dropdown{
+  width : 100%;
+  border: 1px solid #ddd;
+  box-sizing: border-box; 
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.overview-dropdown form{
+  float: center;;
 }
 
 /* UNIVERSITY SECTION*/
@@ -379,45 +506,83 @@ h2 {
 .university-header{
   text-align: center;
   font-size: 3.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .university-subheader{
   text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
 }
 
-.module-distribution{
+.nus-img1{
+  max-width: 130%;
+  max-height: 130%;
+}
+
+.ntu-img1{
+  max-width: 150%;
+  max-height: 150%;
+}
+
+.smu-img1{
+  max-width: 140%;
+  max-height: 140%;
+}
+
+.university-course-header{
   text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 6rem;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
 }
 
-.modules{
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 4rem;
+.button-course-container{
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
+.button-course{
+  background-color: #d2dbfe;
+  width: 100%;
+  border: none;
+  color: black;
+  padding: 30px 50px 40px 50px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 40px;
+}
 
-.module-list{
+.course-name{
   text-align: left;
-  font-size: 1rem;
-  margin-bottom: 6rem;
-  margin-left: 20rem;
+  font-size: 2rem;
+  font-weight: bolder;
 }
+
+.course-department{
+  text-align: left;
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.course-description{
+  text-align: left;
+  line-height: 1.3;
+  font-weight:550;
+  font-size: 1.2rem;
+}
+
 
 .button-selected{
-  background-color: #106698;
-  border: 3px solid #106698;
-  color: white;
-  padding: 15px 32px;
+  background-color: #23377E;
+  border: none;
+  color: #DAE2FF;
+  padding: 10px 50px;
   text-decoration: none;
   display: inline-block;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 /* COMPARE */
