@@ -21,7 +21,7 @@ const Home = () => {
                         <h2 className="heading-left">What is Data Science?</h2>
                         <p className="subtitle"> Understand what data science comprises by knowing the skills learned in data science courses and the job prospects in the data industry. </p>
 
-                        <Link to="/overview">
+                        <Link to="/overview" onClick={() => {window.scroll(0, 0);}}>
                             <button className="btn btn--outline"> Learn More </button>
                         </Link>
                     </div>
@@ -43,7 +43,7 @@ const Home = () => {
                                 <img src="img/home-2.png" className="home-illustration" />
                                 <h2> Course Comparison </h2>
                                 <p className="subtitle-center"> No more hassle in comparing data science courses from multiple resources. Try our comparison feature to discern the differences between two data science courses seamlessly.</p>
-                                <Link to="/compare">
+                                <Link to="/compare" onClick={() => {window.scroll(0, 0);}}>
                                     <button className="btn btn--outline"> Compare Now </button>
                                 </Link>
                             </div>
@@ -54,7 +54,7 @@ const Home = () => {
                                 <img src="img/home-3.png" className="home-illustration" />
                                 <h2> Course Finder</h2>
                                 <p className="subtitle-center"> Get personalized recommendation for the best data science courses that align with your skills and preferences by taking our quiz, specially tailored for you.</p>
-                                <Link to="/quiz">
+                                <Link to="/quiz" onClick={() => {window.scroll(0, 0);}}>
                                     <button className="btn btn--outline"> Take Quiz </button>
                                 </Link>
                             </div>
