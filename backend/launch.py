@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, jsonify, make_response
 import pandas as pd
 import csv
+from Scripts.dsa3101_lda_only import topic_labels, process_input_file,assign_cluster
 
 app = Flask(__name__)
 
@@ -11,6 +12,8 @@ university_mappings = {"NUS": ["Data Science and Analytics", "Business Analytics
 job_types = ['Data Analyst', 'Data Scientist', 'Quantitative Researcher', 'Quantitative Analyst', 'Business Analyst']
 
 clusters = ["Math-based Optimization (ML)", "Mathematical and Statistical Analysis (Theory-based)", "Project Management", "Machine Learning"]
+
+lda_model,doc_term_matrix,dictionary,lemmatized_stuff = process_input_file("Scraping/data/module_details_labelled.csv")
 
 '''
 courses_defaults = {"university": ["NUS", "NTU", "SMU"],
@@ -48,6 +51,18 @@ def jobs():
     else:
         return jsonify(df[df["job_type"] == job].to_json(orient = "records", index = False))
 
+# pass in description for anything - a job, course description, and get the corresponding topic distribution
+@app.route("/distribution", methods = ["GET"])
+def distribution():
+    description = request.args.get("description", None)
+    if description == None:
+        return make_response(f"fill in description", 400)
+    else:
+        dominant_topic, topic_keywords, result = assign_cluster(description, lda_model, dictionary)
+        for key in result:
+            result[key] = float(result[key]) # convert to float to prevent float32 typeError
+        return jsonify({"dominant_topic": dominant_topic, "topic_keywords": topic_keywords, "distribution": result})
+
 @app.route("/quiz-questions", methods = ["GET"])
 def quiz_questions():
     df = pd.read_csv("Questions/quiz_questions.csv")
@@ -58,3 +73,4 @@ def quiz_questions():
 @app.route("/quiz-results", methods = ["GET"])
 def quiz_results():
     pass
+
