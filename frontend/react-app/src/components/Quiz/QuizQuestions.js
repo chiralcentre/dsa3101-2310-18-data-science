@@ -63,23 +63,24 @@ const QuizQuestions = () => {
                         </div>
                         );
                     })}
-                </div>           
-                <div className="button-container">
-                    <button className='button-1' onClick={() => handleButtons('back')}>Back</button>
+                </div>  
+                <div className="button-quiz-container">
+                    <button className='button-quiz-1' onClick={() => handleButtons('back')}>Back</button>
                     { num === maxNum && (
-                        <button className='button-2' onClick={() => handleButtons('submit')}>Submit</button>
+                        <button className='button-quiz-2' onClick={() => handleButtons('submit')}>Submit</button>
                     )}
                     { num !== maxNum && (
-                        <button className='button-3' onClick={() => handleButtons('next')}>Next</button>
+                        <button className='button-quiz-3' onClick={() => handleButtons('next')}>Next</button>
                     )}
-                </div>               
+                </div>             
+                <div className="foot-note"> { num } of { maxNum } Questions</div>        
                 {modalVisible && (
                     Object.keys(choices).length === maxNum ? (
                         <div className="modal">
                             <div className="modal-container">
                                 <img src="/img/Checklist.png" alt="" className='modal-img'/>
                                 <p>Your respond has been<br />submitted.</p>
-                                <button className='button-5' onClick={() => handleButtons('success')}>See your result!</button>
+                                <button className='button-quiz-5' onClick={() => handleButtons('success')}>See your result!</button>
                             </div>
                         </div>
                     ) : (
@@ -87,12 +88,12 @@ const QuizQuestions = () => {
                             <div className="modal-container">
                                 <img src="/img/Alert.png" alt="" className='modal-img'/>
                                 <p>Please answer all questions<br />before submitting.</p>
-                                <button className='button-4' onClick={() => handleButtons('closeModal')}>Back</button>
+                                <button className='button-quiz-4' onClick={() => handleButtons('closeModal')}>Back</button>
                             </div>
                         </div>
                     )
                 )}
-                <div className="foot-note"> { num } of { maxNum } Questions</div> 
+                 
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ const Feedback = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container-feedback">
             <div className="feedback">
                 <div className="feedback-text-box">
                     <h2 className="feedback-text">Get in touch with us!</h2>
@@ -32,7 +32,7 @@ const Feedback = () => {
 
                     <form ref={form} className="feedback-form" onSubmit={sendEmail}>
                         <div>
-                            <label for="name" className="feedback-text">Name</label>
+                            <label for="name">Name</label>
                             <input
                                 id="name"
                                 type="name"
@@ -43,7 +43,7 @@ const Feedback = () => {
                         </div>
 
                         <div>
-                            <label for="email" className="feedback-text">Email address</label>
+                            <label for="email">Email address</label>
                             <input
                                 id="email"
                                 type="email"
@@ -54,7 +54,7 @@ const Feedback = () => {
                         </div>
 
                         <div>
-                            <label for="subject" className="feedback-text">Subject</label>
+                            <label for="subject">Subject</label>
                             <input
                                 id="subject"
                                 type="subject"
@@ -65,12 +65,12 @@ const Feedback = () => {
                         </div>
 
                         <div>
-                            <label for="message" className="feedback-text">Message</label>
-                            <textarea id="message" name="message" placeholder="Write your message here" style={{ "height": "500px" }}></textarea>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Write your message here"></textarea>
 
                         </div>
 
-                        <button type="submit" className="btn-form btn--outline">Submit</button>
+                        <button type="submit" className="btn btn--form">Submit</button>
                     </form>
 
                 </div>

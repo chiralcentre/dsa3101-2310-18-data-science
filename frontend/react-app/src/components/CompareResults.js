@@ -6,7 +6,7 @@ const CompareResults = ({uni1, uni2, course1, course2}) => {
     // const metric2 = fetch();
     
     const data1 = {
-        labels: ['Math-based Optimization (ML)', 'Mathematical and Statistical Analysis (Theory-based)', 'Project Management', 'Machine Learning'],
+        labels: ['Algorithm & Numerical Methods', 'Math & Statistics', 'Project Management', 'Machine Learning'],
         datasets: [
             {
                 label: `${uni1} ${course1}`,
