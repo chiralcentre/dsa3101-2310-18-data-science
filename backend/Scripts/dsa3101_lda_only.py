@@ -206,11 +206,11 @@ def assign_cluster(new_document, ldamodel, dictionary):
     # Topic distribution
     topic_distribution = ldamodel.get_document_topics(new_bow)
 
-    result = {}
+    result = []
     for i in range(len(topic_distribution)):
         topic_id, probability = topic_distribution[i]
         topic_label = topic_labels.get(topic_id)
-        result[topic_label] = probability
+        result.append((topic_label,probability))
 
     return dominant_topic, topic_keywords, result
 
@@ -235,7 +235,7 @@ def topic_distribution_for_each_course(course_data,description,lda_model,diction
     course_data["topic_keywords"] = course_data["cluster_assigned"].apply(lambda x: x[1])
     course_data["topic_distribution"] = course_data["cluster_assigned"].apply(lambda x: x[2])
 
-def topic_distribution_for_each_job(job_data, job_desc):
+def topic_distribution_for_each_job(job_data,job_desc,lda_model,dictionary):
     job_data["cluster_assigned"]= job_data[job_desc].apply(lambda x: assign_cluster(x, lda_model, dictionary))
     job_data["dominant_topic"] = job_data["cluster_assigned"].apply(lambda x: x[0])
     job_data["topic_keywords"] = job_data["cluster_assigned"].apply(lambda x: x[1])
@@ -268,15 +268,14 @@ def main():
     course_data = pd.read_csv("../Scraping/data/module_details_labelled.csv")
     topic_distribution_for_each_course(course_data,"Course_Description",lda_model,dictionary)
 
-    course_data.head()
-
     course_data.to_csv("lda_topic_distribution_for_modules_final.csv") # can save the csv then query the result u want from here
-    '''
+    
     """### Define function that segregate topics and their proportions in each module (course) or job"""
 
     def segregate(df, i):
         topic_distribution = df.loc[i, 'topic_distribution']
         topic_distribution = ast.literal_eval(topic_distribution) # to convert string to a list of tuples
+        #print(topic_distribution)
         for topic, prop in topic_distribution:
             df.loc[i, topic] = prop
 
@@ -299,10 +298,10 @@ def main():
         for i in range(len(new_modules_df)):
             segregate(new_modules_df, i) # segregate topics and proportion in each module/course
 
-        td_majors = round((new_modules_df.groupby(['School', 'Major'])['Algorithms and Numerical Methods',
+        td_majors = round((new_modules_df.groupby(['School', 'Major'])[['Algorithms and Numerical Methods',
                                         'Machine Learning',
                                         'Project Management',
-                                        'Math and Statistics'].mean())*100, 1)
+                                        'Math and Statistics']].mean())*100, 1)
         return td_majors
 
     topic_distribution_majors = average_topic_distribution_for_majors(modules_df)
@@ -310,8 +309,8 @@ def main():
 
     """### Topic Distribution for each job role"""
 
-    job_data = pd.read_csv("job_offers_categorized.csv")
-    topic_distribution_for_each_job(job_data,"job_desc")
+    job_data = pd.read_csv("../Scraping/data/job_offers_categorized.csv")
+    topic_distribution_for_each_job(job_data,"job_desc",lda_model,dictionary)
     job_data.to_csv("lda_topic_distribution_for_jobs.csv")
 
     """### Calculating our Results for Different Job Roles
@@ -329,15 +328,15 @@ def main():
                                 'Math and Statistics':'float'})
         for i in range(len(jobs_df)):
             segregate(jobs_df, i)
-        td_jobs = round((jobs_df.groupby(['job_type'])['Algorithms and Numerical Methods',
+        td_jobs = round((jobs_df.groupby(['job_type'])[['Algorithms and Numerical Methods',
                                         'Machine Learning',
                                         'Project Management',
-                                        'Math and Statistics'].mean())*100, 1)
+                                        'Math and Statistics']].mean())*100, 1)
         return td_jobs
 
     topic_distribution_jobs = average_topic_distribution_for_jobs(jobs_df)
     topic_distribution_jobs.to_csv("average_topic_distribution_for_jobs.csv")
-    '''
+    
 
 if __name__ == "__main__":
     main()

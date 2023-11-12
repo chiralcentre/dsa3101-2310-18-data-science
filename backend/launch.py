@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, jsonify, make_response
 import pandas as pd
-import csv
 from Scripts.dsa3101_lda_only import topic_labels, process_input_file,assign_cluster
+from scipy.stats import entropy
 
 app = Flask(__name__)
 
@@ -59,9 +59,10 @@ def distribution():
         return make_response(f"fill in description", 400)
     else:
         dominant_topic, topic_keywords, result = assign_cluster(description, lda_model, dictionary)
-        for key in result:
-            result[key] = float(result[key]) # convert to float to prevent float32 typeError
-        return jsonify({"dominant_topic": dominant_topic, "topic_keywords": topic_keywords, "distribution": result})
+        ans = {}
+        for key,value in result:
+            ans[key] = float(value) # convert to float to prevent float32 typeError
+        return jsonify({"dominant_topic": dominant_topic, "topic_keywords": topic_keywords, "distribution": ans})
 
 @app.route("/quiz-questions", methods = ["GET"])
 def quiz_questions():
@@ -70,7 +71,28 @@ def quiz_questions():
     limit = min(limit, len(df))
     return jsonify(df.iloc[:limit].to_json(orient = "records", index = False))
 
-@app.route("/quiz-results", methods = ["GET"])
+# return top 3 majors closest to quiz distribution
+@app.route("/quiz-results", methods = ["POST"])
 def quiz_results():
-    pass
+    df = pd.read_csv("Scraping/data/average_topic_distribution_for_majors.csv")
+    answers = request.json
+    if answers == None:
+        return make_response("number of questions selected for each question category required", 400)
+    keys = {int(k) for k in answers}
+    if keys != set(topic_labels.keys()): 
+        return make_response("Invalid topic indices", 400)
+    total = sum(answers.values())
+    quiz_distribution = [0,0,0,0]
+    for key in answers:
+        quiz_distribution[int(key)] = float(answers[key] / total)
+    best = []
+    # use KL divergence strat to return closest 3 majors
+    for row in df.itertuples():
+        # ignore 0 index
+        row_distribution = list(map(float,[row[5],row[3],row[4],row[6]]))
+        best.append((row[1],row[2],entropy(quiz_distribution,row_distribution)))
+    best.sort(key = lambda x: x[2])
+    return jsonify(best[:3])
+
+
 
