@@ -70,6 +70,6 @@ for c in string.ascii_uppercase[:]:
 
 print("finished scraping, saving data...")
 
-with open("./data/smu_courses_all.csv", "w", newline="") as f:
+with open("../data/smu_courses_all.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(data)

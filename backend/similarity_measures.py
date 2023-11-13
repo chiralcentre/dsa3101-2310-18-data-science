@@ -264,7 +264,7 @@ class BERT_Model:
 
 
 if __name__ == '__main__':  # Code for testing
-    mdl = BERT_Model(pd.read_csv('Scraping/data/module_details_labelled.csv'), pd.read_csv('Scraping/data/job_offers_categorized.csv'))
+    mdl = BERT_Model(pd.read_csv('./data/module_details_labelled.csv'), pd.read_csv('./data/job_offers_categorized.csv'))
     # print(mdl.get_similar_courses("NUS", "CHS", "DSA1101", "Introduction to Data Science"))
     # print(mdl.get_similar_courses("NUS", "CHS", "DSA1101", "Introduction to Data Science", limit=2))
     # print(mdl.get_similar_courses("NUS", "CHS", "DSA1101", "Introduction to Data Science", threshold=0.9))

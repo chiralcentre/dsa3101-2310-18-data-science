@@ -13,7 +13,7 @@ job_types = ['Data Analyst', 'Data Scientist', 'Quantitative Researcher', 'Quant
 
 clusters = ["Math-based Optimization (ML)", "Mathematical and Statistical Analysis (Theory-based)", "Project Management", "Machine Learning"]
 
-lda_model,doc_term_matrix,dictionary,lemmatized_stuff = process_input_file("Scraping/data/module_details_labelled.csv")
+lda_model,doc_term_matrix,dictionary,lemmatized_stuff = process_input_file("./data/module_details_labelled.csv")
 
 '''
 courses_defaults = {"university": ["NUS", "NTU", "SMU"],
@@ -23,7 +23,7 @@ courses_defaults = {"university": ["NUS", "NTU", "SMU"],
 
 @app.route("/modules", methods = ["GET"])
 def modules():
-    df = pd.read_pickle("Scraping/data/module_details_labelled.pkl")
+    df = pd.read_pickle("./data/module_details_labelled.pkl")
     # if no university is specified, return everything
     uni = request.args.get("university", None)
     if uni == None:
@@ -41,7 +41,7 @@ def modules():
 
 @app.route("/jobs", methods = ["GET"])
 def jobs():
-    df = pd.read_pickle("Scraping/data/job_offers_categorized.pkl")
+    df = pd.read_pickle("./data/job_offers_categorized.pkl")
     # if no job is specified, return everything
     job = request.args.get("job", None)
     if job == None:
@@ -66,7 +66,7 @@ def distribution():
 
 @app.route("/job-distribution", methods = ["GET"])
 def job_distribution():
-    df = pd.read_csv("Scraping/data/average_topic_distribution_for_jobs.csv")
+    df = pd.read_csv("./data/average_topic_distribution_for_jobs.csv")
     # if no job is specified, return everything
     job = request.args.get("job", None)
     if job == None:
@@ -78,7 +78,7 @@ def job_distribution():
     
 @app.route("/course-distribution", methods = ["GET"])
 def course_distribution():
-    df = pd.read_csv("Scraping/data/average_topic_distribution_for_majors.csv")
+    df = pd.read_csv("./data/average_topic_distribution_for_majors.csv")
     uni = request.args.get("university", None)
     major = request.args.get("major", None)
     if uni == None:
@@ -101,7 +101,7 @@ def quiz_questions():
 # return top 3 majors closest to quiz distribution
 @app.route("/quiz-results", methods = ["POST"])
 def quiz_results():
-    df = pd.read_csv("Scraping/data/average_topic_distribution_for_majors.csv")
+    df = pd.read_csv("./data/average_topic_distribution_for_majors.csv")
     answers = request.json
     if answers == None:
         return make_response("number of questions selected for each question category required", 400)

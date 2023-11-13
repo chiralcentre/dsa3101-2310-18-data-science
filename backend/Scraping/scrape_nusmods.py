@@ -31,8 +31,8 @@ def scrape_nus(school, major, link):
     print(school, major)
     content = ""
 
-    if f"{school}_{major}.pdf" in os.listdir("./data/majors_info"):  # Major details is in pdf
-        for page in PyPDF2.PdfReader(open(f"./data/majors_info/{school}_{major}.pdf", "rb")).pages:
+    if f"{school}_{major}.pdf" in os.listdir("../data/majors_info"):  # Major details is in pdf
+        for page in PyPDF2.PdfReader(open(f"../data/majors_info/{school}_{major}.pdf", "rb")).pages:
             content += page.extract_text()
         content = content.replace(" ", " ")   # replace weird space character
     elif major == "CHS":

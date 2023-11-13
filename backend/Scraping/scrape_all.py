@@ -5,7 +5,7 @@ from scrape_smu import *
 
 output = [["School", "Major", "Course_Code", "Course_Name", "Course_Description", "Prereq"]]
 
-major_links = [row for row in csv.reader(open("./data/majors_links.csv", 'r'))]
+major_links = [row for row in csv.reader(open("../data/majors_links.csv", 'r'))]
 
 for school, major, link in major_links:
     if school == "NUS":
@@ -16,6 +16,6 @@ for school, major, link in major_links:
         output += scrape_smu(school, major, link)
 
 
-with open("./data/module_details.csv", "w", newline='') as f:
+with open("../data/module_details.csv", "w", newline='') as f:
     writer = csv.writer(f)
     writer.writerows(output)

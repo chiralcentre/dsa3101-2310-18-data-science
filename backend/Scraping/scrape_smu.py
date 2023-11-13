@@ -5,8 +5,8 @@ import time
 def scrape_smu(school, major, link):
     print(school, major)
 
-    # Run scrape_smu_all_courses.py to generate ./data/smu_courses_all.csv
-    with open("./data/smu_courses_all.csv", "r") as f:
+    # Run scrape_smu_all_courses.py to generate ../data/smu_courses_all.csv
+    with open("../data/smu_courses_all.csv", "r") as f:
         reader = csv.reader(f)
         all_courses_info = {row[0]:row for row in reader}
     all_courses_info.pop("course_code")  # Remove header column

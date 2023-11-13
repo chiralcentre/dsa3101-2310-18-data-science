@@ -122,7 +122,7 @@ for i in range(len(links)):
 df = pd.DataFrame(list(zip(job_titles,company_names,job_desc)), columns =['job_title', 'company_name','job_desc'])
 
 # Storing the data to csv file
-df.to_csv('job_offers.csv', index=False)
+df.to_csv('../data/job_offers.csv', index=False)
                                             
 print("Ended")
                                             
