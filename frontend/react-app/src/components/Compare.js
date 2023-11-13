@@ -57,63 +57,56 @@ const Compare = () => {
         handleChange(uni2, 2)
     }, [uni2])
 
-    // useEffect(() => {
-
-    // }, [display])
-
     return (
         <div className="compare">
-            <div className="compare-title">
-                <h1 className="heading-secondary">Compare Data Science Courses</h1>
-                <p className="subtitle-secondary">No more hassle in comparing data science courses from multiple resources. Try our comparison feature to discern the differences between two data science courses seamlessly.</p>
+            <div className="container-heading">
+                <h1 className="heading-title secondary">Compare Data Science Courses</h1>
+                <p className="heading-subtitle-secondary">No more hassle in comparing data science courses from multiple resources. Try our comparison feature to discern the differences between two data science courses seamlessly.</p>
             </div>
 
-            <div className="compare-dropdown">
-                <div className="dropdown">
-                    <form>
-                        <label>University</label>
-                        <select value={uni1} onChange={(e) => { setUni1(e.target.value) }}>
-                            <option value="NUS">NUS</option>
-                            <option value="NTU">NTU</option>
-                            <option value="SMU">SMU</option>
-                        </select>
+            <div className="container-body margin-bottom">
+                <div className="compare-dropdown">
+                    <div className="dropdown">
+                        <form>
+                            <label>University</label>
+                            <select value={uni1} onChange={(e) => { setUni1(e.target.value) }}>
+                                <option value="NUS">NUS</option>
+                                <option value="NTU">NTU</option>
+                                <option value="SMU">SMU</option>
+                            </select>
 
-                        <label>Course</label>
-                        <select value={course1} onChange={(e) => { setCourse1(e.target.value); setDisplay(false); }}>
-                            {courseList1.map((course) => (<option value={course}>{course}</option>))}
-                        </select>
-                    </form>
+                            <label>Course</label>
+                            <select value={course1} onChange={(e) => { setCourse1(e.target.value); setDisplay(false); }}>
+                                {courseList1.map((course) => (<option value={course}>{course}</option>))}
+                            </select>
+                        </form>
+                    </div>
+
+                    <div className="dropdown">
+                        <form>
+                            <label>University</label>
+                            <select value={uni2} onChange={(e) => { setUni2(e.target.value) }}>
+                                <option value="NUS">NUS</option>
+                                <option value="NTU">NTU</option>
+                                <option value="SMU">SMU</option>
+                            </select>
+
+                            <label>Course</label>
+                            <select value={course2} onChange={(e) => { setCourse2(e.target.value); setDisplay(false); }}>
+                                {courseList2.map((course) => (<option value={course}>{course}</option>))}
+                            </select>
+                        </form>
+                    </div>
                 </div>
 
-                <div className="dropdown">
-                    <form>
-                        <label>University</label>
-                        <select value={uni2} onChange={(e) => { setUni2(e.target.value) }}>
-                            <option value="NUS">NUS</option>
-                            <option value="NTU">NTU</option>
-                            <option value="SMU">SMU</option>
-                        </select>
-
-                        <label>Course</label>
-                        <select value={course2} onChange={(e) => { setCourse2(e.target.value); setDisplay(false); }}>
-                            {courseList2.map((course) => (<option value={course}>{course}</option>))}
-                        </select>
-                    </form>
+                <div className="button-container">
+                    <button id='compare-button' className="btn btn--outline" onClick={() => handleClick()}>Compare</button>
                 </div>
+
+
+                {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2} />}
+
             </div>
-
-            <div className="button-container">
-                <button id='compare-button' className="btn btn--outline" onClick={() => handleClick()}>Compare</button>
-            </div>
-
-
-            {display && <CompareResults uni1={uni1} uni2={uni2} course1={course1} course2={course2} />}
-
-
-
-
-
-
         </div>
 
     );

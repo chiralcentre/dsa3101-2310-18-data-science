@@ -26,7 +26,7 @@ const Feedback = () => {
             <div className="feedback">
                 <div className="feedback-text-box">
                     <h2 className="feedback-text">Get in touch with us!</h2>
-                    <p className="feedback-text subtitle">
+                    <p className="feedback-text">
                         Whether you have a question or just want to leave us some feedbacks, we would like to hear from you! Please fill out the form below and we'll get back to you as soon as possible.
                     </p>
 

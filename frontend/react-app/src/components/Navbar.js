@@ -1,20 +1,49 @@
 import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+import { navItems } from "./NavItems";
+import Dropdown from "./Dropdown";
 
 const Navbar = () => {
-    return (
-            <header className="header">
-                <h2 className="navbar-logo">DG.</h2>
+    const [dropdown, setDropdown] = useState(false);
 
-                <nav>
-                    <ul className="main-nav-list">
-                        <li><NavLink className="main-nav-link" exact to="/">Home</NavLink></li>
-                        <li><NavLink className="main-nav-link" to="/overview">Overview</NavLink></li>
-                        <li><NavLink className="main-nav-link" to="/compare">Compare</NavLink></li>
-                        <li><NavLink className="main-nav-link" to="/quiz">Quiz</NavLink></li>
-                        <li><NavLink className="main-nav-link" to="/about">About</NavLink></li>
-                    </ul>
-                </nav>
-            </header>
+    return (
+        <header className="header">
+            <h2 className="navbar-logo">DG.</h2>
+
+            <nav>
+                <ul className="nav-list">
+                    {navItems.map((item) => {
+                        if (item.title === "Overview") {
+                            return (
+                                <li
+                                    key={item.id}
+                                    onMouseEnter={() => setDropdown(true)}
+                                    onMouseLeave={() => setDropdown(false)}
+                                >
+                                    <NavLink className="nav-link" to={item.path}>{item.title} &#x25BE; </NavLink>
+                                    {dropdown && <Dropdown />}
+                                </li>
+                            );
+                        }
+                        else if (item.title === "Home") {
+                            return (
+                                <li key={item.id}>
+                                <NavLink className="nav-link" exact to={item.path}>{item.title}</NavLink>
+                            </li>
+                            );
+                        }
+                        else {
+                            return (
+                                <li key={item.id}>
+                                    <NavLink className="nav-link" to={item.path}>{item.title}</NavLink>
+                                </li>
+                            );
+                        }
+                    })}
+                </ul>
+            </nav>
+        </header>
     );
 }
 
