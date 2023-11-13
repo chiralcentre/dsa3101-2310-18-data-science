@@ -190,7 +190,7 @@ class BERT_Model:
         job_df = Preprocess_jobs(job_df).data
         bert_vector_job = embed_text(job_df.iloc[0]["job_desc"], self.model, self.tokenizer).detach().numpy()
 
-        if course_types:
+        if course_types != "All":
             selected_courses = self.all_courses[self.all_courses["Category"].isin(course_types)]
         else:
             selected_courses = self.all_courses
@@ -216,7 +216,7 @@ class BERT_Model:
             print(f"There is no job description for {job_type}")
             return
 
-        if course_types:
+        if course_types != "All":
             selected_courses = self.all_courses[self.all_courses["Category"].isin(course_types)]
         else:
             selected_courses = self.all_courses
@@ -246,7 +246,7 @@ class BERT_Model:
         Returns a list of [course_id, similarity score] that doesn't meet min_similarity with any course in program.
         """
         program_courses = self.all_courses.loc[(self.all_courses["School"] == school) & (self.all_courses["Major"] == program)]
-        if course_types:
+        if course_types != "All":
             selected_courses = self.all_courses[self.all_courses["Category"].isin(course_types)]
         else:
             selected_courses = self.all_courses
