@@ -64,6 +64,33 @@ def distribution():
             ans[key] = float(value) # convert to float to prevent float32 typeError
         return jsonify({"dominant_topic": dominant_topic, "topic_keywords": topic_keywords, "distribution": ans})
 
+@app.route("/job-distribution", methods = ["GET"])
+def job_distribution():
+    df = pd.read_csv("Scraping/data/average_topic_distribution_for_jobs.csv")
+    # if no job is specified, return everything
+    job = request.args.get("job", None)
+    if job == None:
+        return make_response("job not provided", 400)
+    elif job not in job_types:
+        return make_response(f"job {job} not found", 400)
+    else:
+        return jsonify(df[df["job_type"] == job].to_json(orient = "records", index = False))
+    
+@app.route("/course-distribution", methods = ["GET"])
+def course_distribution():
+    df = pd.read_csv("Scraping/data/average_topic_distribution_for_majors.csv")
+    uni = request.args.get("university", None)
+    major = request.args.get("major", None)
+    if uni == None:
+        return make_response("university not provided", 400)
+    elif uni not in university_mappings:
+        return make_response(f"university {uni} not within supported list",400)
+    if major == None:
+        return make_response("major not provided", 400)
+    elif major not in university_mappings[uni]:
+        return make_response(f"major {major} not found for {uni}", 400)
+    return jsonify(df[(df["School"] == uni) & (df["Major"] == major)].to_json(orient = "records", index = False))
+
 @app.route("/quiz-questions", methods = ["GET"])
 def quiz_questions():
     df = pd.read_csv("Questions/quiz_questions.csv")
