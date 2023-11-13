@@ -35,9 +35,6 @@ function App() {
         <Route path="/quiz/questions">
           <QuizQuestions />
         </Route>
-        <Route path="/quiz/result">
-          <QuizResult />
-        </Route>
         <Route path="/about">
           <About />
         </Route>
