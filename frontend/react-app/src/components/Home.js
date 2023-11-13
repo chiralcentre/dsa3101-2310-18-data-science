@@ -4,13 +4,13 @@ import Feedback from "./Feedback";
 const Home = () => {
     return (
         <section>
-            <div className="home-title">
+            <div className="container-heading wide-padding">
                 <h1 className="heading-primary"> Data Guru </h1>
                 <p className="heading-subtitle"> Your Guide to Data Science Education </p>
                 <a href="#overview" className="btn btn--outline bounce"> Get Started &darr;</a>
             </div>
 
-            <div className="container">
+            <div className="container-body">
                 <div className="funfact">
                     <h3> DO YOU KNOW?</h3>
                     <p className="italic">“Data science was identified as the skill with the largest skill gap, according to a 2021 report by the World Economic Forum.”</p>
