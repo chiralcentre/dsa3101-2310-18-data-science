@@ -7,7 +7,12 @@ const Home = () => {
             <div className="container-heading wide-padding">
                 <h1 className="heading-title primary"> Data Guru </h1>
                 <p className="heading-subtitle"> Your Guide to Data Science Education </p>
+                <div className="circle-blue left"></div>
+                <div className="circle-purple left"></div>
+                <div className="circle-blue right"></div>
+                <div className="circle-purple right"></div>
                 <a href="#overview" className="btn btn--outline bounce"> Get Started &darr; </a>
+                
             </div>
 
             <div className="container-body">
