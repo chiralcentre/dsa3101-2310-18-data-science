@@ -12,6 +12,7 @@ const QuizQuestions = () => {
     const [questions, setQuestions] = useState({ questions: [] }); 
     const maxNum = questions.questions.length; 
     const choicesLength = Object.keys(choices).length;
+    const [swap, setSwap] = useState(false);
 
     const data = useFetch('http://localhost:5000/quiz-questions');
     const transformData = (data) => {
@@ -20,10 +21,10 @@ const QuizQuestions = () => {
             questions: parsedData.map((item, index) => ({
                 question: item.question,
                 options: [
-                    item.A.toString(),
-                    item.B.toString(),
-                    item.C.toString(),
-                    item.D.toString()
+                    String(item[0]),
+                    String(item[1]),
+                    String(item[2]),
+                    String(item[3])
                 ],
                 id: index + 1,
             })),
@@ -72,8 +73,6 @@ const QuizQuestions = () => {
             });
         }
     }
-
-    const [swap, setSwap] = useState(false);
 
     return (
         <div className="quiz-questions">

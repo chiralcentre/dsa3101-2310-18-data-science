@@ -774,20 +774,21 @@ h2 {
 
 .question-bar {
   padding: 15px 20px 20px 25px;
+  min-height: 8%;
   font-weight: bold;
   font-family: Helvetica;
 }
 
 .question-options {
-  padding: 0px 20px 20px 20px;
-  max-height: 55%;
+  padding: 0px 20px 0% 20px;
+  max-height: 60%;
 }
 
 .option-box {
   display: flex;
   padding: 0px 15px 0px 15px;
   align-items: center;
-  height: 63px;
+  height: 60px;
   border-radius: 5px;
   margin-bottom: 12px; 
   cursor: pointer;
@@ -822,7 +823,7 @@ h2 {
   align-items: center;
   width: 92%; 
   align-self: center;
-  margin-top: 22px;
+  margin-top: 10px;
 }
 
 .restart-quiz-button,

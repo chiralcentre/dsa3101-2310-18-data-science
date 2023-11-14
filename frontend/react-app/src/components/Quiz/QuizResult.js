@@ -10,7 +10,7 @@ const QuizResult = ({ choices }) => {
     const stringValue = String(value);
     postFormat[stringValue] += 1;
   });
-
+  
   async function getResult() {
     const res = await fetch("http://localhost:5000/quiz-results", {
       method: "POST",
