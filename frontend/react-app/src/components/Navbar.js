@@ -21,7 +21,7 @@ const Navbar = () => {
                                     onMouseEnter={() => setDropdown(true)}
                                     onMouseLeave={() => setDropdown(false)}
                                 >
-                                    <NavLink className="nav-link" to={item.path}>{item.title} &#x25BE; </NavLink>
+                                    <NavLink className="nav-link" exact to={item.path}>{item.title} &#x25BE; </NavLink>
                                     {dropdown && <Dropdown />}
                                 </li>
                             );
@@ -36,7 +36,7 @@ const Navbar = () => {
                         else {
                             return (
                                 <li key={item.id}>
-                                    <NavLink className="nav-link" to={item.path}>{item.title}</NavLink>
+                                    <NavLink className="nav-link" exact to={item.path}>{item.title}</NavLink>
                                 </li>
                             );
                         }
