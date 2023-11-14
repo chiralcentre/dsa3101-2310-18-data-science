@@ -774,7 +774,7 @@ h2 {
 
 .question-bar {
   padding: 15px 20px 20px 25px;
-  min-height: 8%;
+  height: 8%;
   font-weight: bold;
   font-family: Helvetica;
 }
