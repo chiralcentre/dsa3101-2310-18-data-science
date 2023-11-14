@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, jsonify, make_response
 import pandas as pd
-from Scripts.dsa3101_lda_only import topic_labels, process_input_file,assign_cluster
+from lda import *
 from similarity_measures import *
 from scipy.stats import entropy
 from datetime import datetime

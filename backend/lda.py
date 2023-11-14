@@ -9,7 +9,7 @@ Original file is located at
 # Word2Vec and LDA
 https://www.kaggle.com/code/jl18pg052/word-embedding-word2vec-topic-modelling-lda
 
-### Extracting informations from Text using Text Mining Techniques
+### Extracting information from Text using Text Mining Techniques
 
 Import Libraries
 """
@@ -17,22 +17,22 @@ Import Libraries
 import pandas as pd
 import numpy as np
 import re, nltk
-nltk.download("stopwords")
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+# nltk.download("stopwords")
+# nltk.download('punkt')
+# nltk.download('wordnet')
 '''
 import spacy
 nlp = spacy.load('en_core_web_sm')
 '''
-nltk.download('wordnet')
-from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm
-from gensim.models import Word2Vec
 from sklearn.manifold import TSNE
 import gensim
+from gensim.models import Word2Vec
 from gensim import corpora
 from gensim.models.coherencemodel import CoherenceModel
 from collections import Counter
-nltk.download('punkt')
 import ast
 
 # globals start
@@ -243,7 +243,7 @@ def topic_distribution_for_each_job(job_data,job_desc,lda_model,dictionary):
 # Functions end
 
 def main():
-    lda_model,doc_term_matrix,dictionary,lemmatized_stuff = process_input_file("../data/module_details_labelled.csv")
+    lda_model,doc_term_matrix,dictionary,lemmatized_stuff = process_input_file("./data/module_details_labelled.csv")
     #lda_model.print_topics()
     #coherence_model_lda = CoherenceModel(model=lda_model, texts=lemmatized_stuff, dictionary=dictionary, coherence='c_v')
     #coherence_lda = coherence_model_lda.get_coherence()
@@ -265,7 +265,7 @@ def main():
     ### output: adds dataframe column (no output, it will just modify the existing dataframe u fit in; you can save the csv then query from there)
     """
 
-    course_data = pd.read_csv("../data/module_details_labelled.csv")
+    course_data = pd.read_csv("./data/module_details_labelled.csv")
     topic_distribution_for_each_course(course_data,"Course_Description",lda_model,dictionary)
 
     course_data.to_csv("lda_topic_distribution_for_modules_final.csv") # can save the csv then query the result u want from here
@@ -309,7 +309,7 @@ def main():
 
     """### Topic Distribution for each job role"""
 
-    job_data = pd.read_csv("../data/job_offers_categorized.csv")
+    job_data = pd.read_csv("./data/job_offers_categorized.csv")
     topic_distribution_for_each_job(job_data,"job_desc",lda_model,dictionary)
     job_data.to_csv("lda_topic_distribution_for_jobs.csv")
 
