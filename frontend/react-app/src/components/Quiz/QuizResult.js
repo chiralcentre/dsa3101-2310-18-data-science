@@ -40,7 +40,7 @@ const QuizResult = ({ choices }) => {
           {result.reverse().map((ranking, index) => (
             <p key={index}>{`${index + 1}. ${ranking[1]} at ${
               ranking[0]
-            } - Score: ${ranking[2].toFixed(2)}`}</p>
+            }`}</p>
           ))}
         </div>
       </div>
