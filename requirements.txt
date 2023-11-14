@@ -2,3 +2,12 @@
 
 requests
 PyPDF2
+pandas
+numpy
+nltk
+torch
+transformers
+scipy
+Flask
+gensim
+scikit-learn
