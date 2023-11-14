@@ -947,7 +947,8 @@ h2 {
 }
 
 .result-desc {
-  margin-top:10px;
+  height:75px;
+  margin-top:15px;
 }
 
 .result-title {
@@ -955,7 +956,6 @@ h2 {
 }
 
 .restart-quiz-button {
-  margin-top: 10px;
   width:150px;
 }
 
