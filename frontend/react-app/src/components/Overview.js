@@ -2,13 +2,11 @@ import { Link } from 'react-router-dom';
 import 'chart.js/auto';
 import { Radar } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Overview = () => {
     const [jobType, setJobType] = useState("Data Analyst");
     const [radarData, setRadarData] = useState(null);
-    const history = useHistory();
     const [finalRadar, setFinalRadar] = useState(null);
 
     const jobColors = {
