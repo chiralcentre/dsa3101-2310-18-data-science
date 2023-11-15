@@ -69,7 +69,7 @@ const Overview = () => {
     return (
         <section className="section-overview">
             {/* <div className="overview"> */}
-            <div className="overview-header-container">
+            <div className="container-heading">
                 <h1 className="heading-secondary">What is Data Science?</h1>
                 <p className="subtitle-secondary">
                     Data science is a multidisciplinary field that involves the use of various techniques, algorithms, processes, and systems to extract knowledge and insights from structured and unstructured data.
