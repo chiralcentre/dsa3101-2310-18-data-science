@@ -1,24 +1,113 @@
 import 'chart.js/auto';
+import { useEffect, useState } from 'react';
 import { Radar } from 'react-chartjs-2';
 
 const CompareResults = ({uni1, uni2, course1, course2}) => {
-    // const metric1 = fetch();
-    // const metric2 = fetch();
+    // const [distribution1, setDistribution1] = useState(null)
+    // const [distribution2, setDistribution2] = useState(null)
+
+    // useEffect(() => {
+    //     console.log('effect 1 ran')
+    //     fetch(`http://localhost:5000/course-distribution?university=${uni1}&major=${course1}`)
+    //     .then(res => {
+    //         return res.json()
+    //     })
+    //     .then(data => {
+    //         setDistribution1(data)
+    //     });
+    // }, []);
+
+    // useEffect(() => {
+    //     console.log('effect 2 ran')
+    //     fetch(`http://localhost:5000/course-distribution?university=${uni2}&major=${course2}`)
+    //     .then(res => {
+    //         return res.json()
+    //     })
+    //     .then(data => {
+    //         setDistribution2(data)
+    //     });
+    // }, []);
+    const [dist1, setDist1] = useState([])
+    const [dist2, setDist2] = useState([])
+
+    useEffect(() => {
+        if (uni1 === 'NUS') {
+            if (course1 === 'Data Science and Analytics') {
+                setDist1([55.4, 4.3, 3.5, 36.8])
+            } else if (course1 === 'Business Analytics') {
+                setDist1([34, 20.8, 32.6, 12.6])
+            } else if (course1 === 'Quantitative Finance') {
+                setDist1([28.6, 4.9, 18, 48.5])
+            } else if (course1 === 'Statistics') {
+                setDist1([34, 6.4, 7.5, 52.1])
+            } else if (course1 === 'Data Science and Economics') {
+                setDist1([50, 24.6, 3.3, 22.1])
+            }
+        } else if (uni1 === 'NTU') {
+            if (course1 === 'Data Science and Artificial Intelligence') {
+                setDist1([46.8, 14.2, 21.8, 17.2])
+            } else if (course1 === 'Economics and Data Science') {
+                setDist1([27.8, 34.3, 24, 13.9])
+            }
+        } else if (uni1 === 'SMU') {
+            if (course1 === 'Quantitative Finance') {
+                setDist1([19.2, 2.6, 60.9, 17.3])
+            } else if (course1 === 'Data Science and Analytics') {
+                setDist1([48.4, 14.8, 22.2, 14.5])
+            } else if (course1 === 'Information Systems (Business Analytics)') {
+                setDist1([26.7, 32.9, 39.9, 0.5])
+            }
+        }
+
+        if (uni2 === 'NUS') {
+            if (course2 === 'Data Science and Analytics') {
+                setDist2([55.4, 4.3, 3.5, 36.8])
+            } else if (course2 === 'Business Analytics') {
+                setDist2([34, 20.8, 32.6, 12.6])
+            } else if (course2 === 'Quantitative Finance') {
+                setDist2([28.6, 4.9, 18, 48.5])
+            } else if (course2 === 'Statistics') {
+                setDist2([34, 6.4, 7.5, 52.1])
+            } else if (course2 === 'Data Science and Economics') {
+                setDist2([50, 24.6, 3.3, 22.1])
+            }
+        } else if (uni2 === 'NTU') {
+            if (course2 === 'Data Science and Artificial Intelligence') {
+                setDist2([46.8, 14.2, 21.8, 17.2])
+            } else if (course2 === 'Economics and Data Science') {
+                setDist2([27.8, 34.3, 24, 13.9])
+            }
+        } else if (uni2 === 'SMU') {
+            if (course2 === 'Quantitative Finance') {
+                setDist2([19.2, 2.6, 60.9, 17.3])
+            } else if (course2 === 'Data Science and Analytics') {
+                setDist2([48.4, 14.8, 22.2, 14.5])
+            } else if (course2 === 'Information Systems (Business Analytics)') {
+                setDist2([26.7, 32.9, 39.9, 0.5])
+            }
+        }
+    }, [])
+
+        
+    
+
     
     const data1 = {
-        labels: ['Algorithm & Numerical Methods', 'Math & Statistics', 'Project Management', 'Machine Learning'],
+        labels: ['Algorithm & Numerical Methods', 'Machine Learning', 'Project Management', 'Math & Statistics'],
         datasets: [
             {
                 label: `${uni1} ${course1}`,
                 backgroundColor: '#FF5D5D50',
                 borderColor: '#FF5D5D',
-                data:[0.2, 0.3, 0.1, 0.4]
+                // data:[distribution1['Algorithm & Numerical Methods'], distribution1['Machine Learning'], distribution1['Project Management'], distribution1['Math & Statistics']]
+                data: dist1
             },
             {
                 label: `${uni2} ${course2}`,
                 backgroundColor: '#6792FF50',
                 borderColor: '#6792FF',
-                data:[0.4, 0.2, 0.3, 0.1]
+                // data:[distribution2['Algorithm & Numerical Methods'], distribution2['Machine Learning'], distribution2['Project Management'], distribution2['Math & Statistics']]
+                data: dist2
             }
         ],
     };
@@ -45,7 +134,8 @@ const CompareResults = ({uni1, uni2, course1, course2}) => {
         }
     };
 
-    return ( 
+    return (
+         
         <div className="result">
             <div className="chart">
                 <Radar data={data1} options={options}/>
