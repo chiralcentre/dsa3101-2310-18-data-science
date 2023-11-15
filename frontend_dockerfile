@@ -1,0 +1,16 @@
+# Base image
+FROM node:16-alpine
+
+# Setting up the work directory 
+WORKDIR /app
+
+# Copying necessary files 
+COPY frontend/public/  /app/public
+COPY frontend/src/ /app/src
+COPY frontend/package.json /app/
+
+# Installing dependencies
+RUN npm install 
+
+# Starting our application 
+CMD ["npm", "start"] 
