@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const Navbar = () => {
     return (
             <header className="header">
-                <h2 className="logo">DG.</h2>
+                <h2 className="navbar-logo">DG.</h2>
 
                 <nav>
                     <ul className="main-nav-list">
