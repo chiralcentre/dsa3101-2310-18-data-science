@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Overview = () => {
-    const [jobType, setJobType] = useState("Data Analyst"); // Added jobType state
-    const [radarData, setRadarData] = useState(null); // State to store radar chart data
+    const [jobType, setJobType] = useState("Data Analyst");
+    const [radarData, setRadarData] = useState(null);
     const history = useHistory();
     const [finalRadar, setFinalRadar] = useState(null);
 
@@ -20,7 +20,6 @@ const Overview = () => {
     };
 
     useEffect(() => {
-        // Fetch job distribution data when component mounts or when jobType changes
         fetchJobDistribution();
     }, [jobType]);
 
@@ -35,22 +34,15 @@ const Overview = () => {
         }
     };
 
-    // Use regular expression to find all numeric values
-    // Check if radarData is not null or undefined
     useEffect(() => {
         if (radarData) {
-            // Use regular expressions to find all numeric values and keys
             const numericValues = radarData.match(/[-+]?[0-9]*\.?[0-9]+/g);
             const keys = radarData.match(/"([^"]+)":/g);
-    
-            // Convert the strings to numbers
             const numbersList = numericValues.map(Number);
-    
-            // Clean up keys (remove quotes and colon)
             const cleanedKeys = keys.map((key) => key.replace(/["":]/g, ''));
     
             const radar = {
-                labels: cleanedKeys.slice(1) || [], // Use cleanedKeys excluding the first element
+                labels: cleanedKeys.slice(1) || [], 
                 datasets: [
                     {
                         label: jobType,
