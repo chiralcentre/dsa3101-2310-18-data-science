@@ -4,30 +4,88 @@ import { Radar } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+
 const Overview = () => {
-    const [uni2, setUni2] = useState("Data Analyst")
-    const [courseList2, setCourseList2] = useState(["Data Science and Analytics", "Business Analytics", "Quantitative Finance", "Statistics", "Data Science and Economics"])
-    const [course2, setCourse2] = useState("")
-    const [display, setDisplay] = useState(false)
-    const history = useHistory()
+    const [selectedJob, setSelectedJob] = useState("Data Analyst");
+    const [display, setDisplay] = useState(false);
+    const history = useHistory();
 
-
-    const radar = {
-        labels: ['Finance/Economics', 'Programming/Algorithm', 'Data Analysis/Modelling', 'Statistics'],
-        datasets: [
-            {
-                label: `${uni2} ${course2}`,
-                backgroundColor: '#23377E',
-                borderColor: 'black',
-                data: [0.2, 0.3, 0.1, 0.4]
+    const options = {
+        scale: {
+            ticks: {
+                beginAtZero: true,
+                min: 0,
+                max: 0.5,
+                stepSize: 0.1,
             },
-        ],
+        },
+        legend: {
+            position: "bottom",
+        },
     };
 
-    const option = {
-
+    const jobData = {
+        "Data Analyst": {
+            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
+            datasets: [
+                {
+                    label: selectedJob,
+                    backgroundColor: 'rgba(35, 55, 126, 0.3)',
+                    borderColor: 'rgba(35, 55, 126, 0.8)',
+                    data: [0.265, 0.262, 0.441, 0.033]
+                },
+            ],
+        },
+        "Data Scientist": {
+            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
+            datasets: [
+                {
+                    label: selectedJob,
+                    backgroundColor: 'rgba(126, 35, 35, 0.3)',
+                    borderColor: 'rgba(126, 35, 35, 0.8)',
+                    data: [0.251, 0.282, 0.442, 0.025]
+                },
+            ],
+        },
+        "Quantitative Researcher": {
+            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
+            datasets: [
+                {
+                    label: selectedJob,
+                    backgroundColor: 'rgba(63, 191, 127, 0.3)',
+                    borderColor: 'rgba(63, 191, 127, 0.8)',
+                    data: [0.2, 0.267, 0.494, 0.039]
+                },
+            ],
+        },
+        "Quantitative Analyst": {
+            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
+            datasets: [
+                {
+                    label: selectedJob,
+                    backgroundColor: 'rgba(242, 201, 76, 0.3)',
+                    borderColor: 'rgba(242, 201, 76, 0.8)',
+                    data: [0.204, 0.267, 0.494, 0.039]
+                },
+            ],
+        },
+        "Business Analyst": {
+            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
+            datasets: [
+                {
+                    label: selectedJob,
+                    backgroundColor: 'rgba(79, 129, 189, 0.3)',
+                    borderColor: 'rgba(79, 129, 189, 0.8)',
+                    data: [0.25, 0.25, 0.476, 0.024]
+                },
+            ],
+        },
     };
 
+    useEffect(() => {
+        // Add any additional logic when the selectedJob changes
+        // ...
+    }, [selectedJob]);
 
     return (
         <section className="section-overview">
@@ -128,7 +186,7 @@ const Overview = () => {
 
             <div className="overview-dropdown">
                 <form>
-                    <select value={uni2} onChange={(e) => { setUni2(e.target.value) }}>
+                    <select value={selectedJob} onChange={(e) => { setSelectedJob(e.target.value); setDisplay(false); }}>
                         <option value="Data Analyst">Data Analyst</option>
                         <option value="Data Scientist">Data Scientist</option>
                         <option value="Quantitative Researcher">Quantitative Researcher</option>
@@ -140,11 +198,10 @@ const Overview = () => {
 
             <div className="result">
                 <div className="chart">
-                    <Radar data={radar} options={option} />
+                    <Radar data={jobData[selectedJob]} options={options} />
                 </div>
             </div>
 
-            {/* </div> */}
         </section>
     );
 }
