@@ -6,87 +6,66 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Overview = () => {
-    const [selectedJob, setSelectedJob] = useState("Data Analyst");
-    const [display, setDisplay] = useState(false);
+    const [jobType, setJobType] = useState("Data Analyst"); // Added jobType state
+    const [radarData, setRadarData] = useState(null); // State to store radar chart data
     const history = useHistory();
+    const [finalRadar, setFinalRadar] = useState(null);
 
-    const options = {
-        scale: {
-            ticks: {
-                beginAtZero: true,
-                min: 0,
-                max: 0.5,
-                stepSize: 0.1,
-            },
-        },
-        legend: {
-            position: "bottom",
-        },
-    };
-
-    const jobData = {
-        "Data Analyst": {
-            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
-            datasets: [
-                {
-                    label: selectedJob,
-                    backgroundColor: 'rgba(35, 55, 126, 0.3)',
-                    borderColor: 'rgba(35, 55, 126, 0.8)',
-                    data: [0.265, 0.262, 0.441, 0.033]
-                },
-            ],
-        },
-        "Data Scientist": {
-            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
-            datasets: [
-                {
-                    label: selectedJob,
-                    backgroundColor: 'rgba(126, 35, 35, 0.3)',
-                    borderColor: 'rgba(126, 35, 35, 0.8)',
-                    data: [0.251, 0.282, 0.442, 0.025]
-                },
-            ],
-        },
-        "Quantitative Researcher": {
-            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
-            datasets: [
-                {
-                    label: selectedJob,
-                    backgroundColor: 'rgba(63, 191, 127, 0.3)',
-                    borderColor: 'rgba(63, 191, 127, 0.8)',
-                    data: [0.2, 0.267, 0.494, 0.039]
-                },
-            ],
-        },
-        "Quantitative Analyst": {
-            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
-            datasets: [
-                {
-                    label: selectedJob,
-                    backgroundColor: 'rgba(242, 201, 76, 0.3)',
-                    borderColor: 'rgba(242, 201, 76, 0.8)',
-                    data: [0.204, 0.267, 0.494, 0.039]
-                },
-            ],
-        },
-        "Business Analyst": {
-            labels: ['Algorithms and Numerical Methods', 'Machine Learning', 'Project Management', 'Statistics'],
-            datasets: [
-                {
-                    label: selectedJob,
-                    backgroundColor: 'rgba(79, 129, 189, 0.3)',
-                    borderColor: 'rgba(79, 129, 189, 0.8)',
-                    data: [0.25, 0.25, 0.476, 0.024]
-                },
-            ],
-        },
+    const jobColors = {
+        "Data Analyst": { backgroundColor: 'rgba(35, 55, 126, 0.3)', borderColor: 'rgba(35, 55, 126, 0.8)' },
+        "Data Scientist": { backgroundColor: 'rgba(126, 35, 35, 0.3)', borderColor: 'rgba(126, 35, 35, 0.8)' },
+        "Quantitative Researcher": { backgroundColor: 'rgba(63, 191, 127, 0.3)', borderColor: 'rgba(63, 191, 127, 0.8)' },
+        "Quantitative Analyst": { backgroundColor: 'rgba(242, 201, 76, 0.3)', borderColor: 'rgba(242, 201, 76, 0.8)' },
+        "Business Analyst": { backgroundColor: 'rgba(79, 129, 189, 0.3)', borderColor: 'rgba(79, 129, 189, 0.8)' },
     };
 
     useEffect(() => {
-        // Add any additional logic when the selectedJob changes
-        // ...
-    }, [selectedJob]);
+        // Fetch job distribution data when component mounts or when jobType changes
+        fetchJobDistribution();
+    }, [jobType]);
 
+    const fetchJobDistribution = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/job-distribution?job=${encodeURIComponent(jobType)}`);
+            const data = await response.json();
+            setRadarData(data);
+
+        } catch (error) {
+            console.error('Error fetching job distribution data:', error);
+        }
+    };
+
+    // Use regular expression to find all numeric values
+    // Check if radarData is not null or undefined
+    useEffect(() => {
+        if (radarData) {
+            // Use regular expressions to find all numeric values and keys
+            const numericValues = radarData.match(/[-+]?[0-9]*\.?[0-9]+/g);
+            const keys = radarData.match(/"([^"]+)":/g);
+    
+            // Convert the strings to numbers
+            const numbersList = numericValues.map(Number);
+    
+            // Clean up keys (remove quotes and colon)
+            const cleanedKeys = keys.map((key) => key.replace(/["":]/g, ''));
+    
+            const radar = {
+                labels: cleanedKeys.slice(1) || [], // Use cleanedKeys excluding the first element
+                datasets: [
+                    {
+                        label: jobType,
+                        backgroundColor: jobColors[jobType].backgroundColor,
+                        borderColor: jobColors[jobType].borderColor,
+                        data: numbersList || [],
+                    },
+                ],
+            };
+            setFinalRadar(radar);
+        }
+    }, [radarData]);
+
+    const option = {};
+    
     return (
         <section className="section-overview">
             {/* <div className="overview"> */}
@@ -186,7 +165,7 @@ const Overview = () => {
 
             <div className="overview-dropdown">
                 <form>
-                    <select value={selectedJob} onChange={(e) => { setSelectedJob(e.target.value); setDisplay(false); }}>
+                    <select value={jobType} onChange={(e) => { setJobType(e.target.value) }}>
                         <option value="Data Analyst">Data Analyst</option>
                         <option value="Data Scientist">Data Scientist</option>
                         <option value="Quantitative Researcher">Quantitative Researcher</option>
@@ -197,9 +176,13 @@ const Overview = () => {
             </div>
 
             <div className="result">
-                <div className="chart">
-                    <Radar data={jobData[selectedJob]} options={options} />
-                </div>
+                {radarData ? (
+                    <div className="chart">
+                        {finalRadar && <Radar data={finalRadar} options={option} />}
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
 
         </section>
