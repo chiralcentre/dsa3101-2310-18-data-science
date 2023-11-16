@@ -42,7 +42,7 @@ const Compare = () => {
                 setCourseList2(["Data Science and Artificial Intelligence", "Economics and Data Science"])
                 setCourse2("Data Science and Artificial Intelligence")
             } if (uni2 === "SMU") {
-                setCourseList2(["Quantitative Finance", "Data Science and Analytics", "Information Systems(Business Analytics)"])
+                setCourseList2(["Quantitative Finance", "Data Science and Analytics", "Information Systems (Business Analytics)"])
                 setCourse2("Quantitative Finance")
             }
         }
