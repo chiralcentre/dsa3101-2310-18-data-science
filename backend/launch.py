@@ -6,10 +6,7 @@ from scipy.stats import entropy
 from datetime import datetime
 import json
 
-from flask_cors import CORS  # Import the CORS module
 app = Flask(__name__)
-CORS(app)  # Initialize CORS with your Flask app
-
 app.json.sort_keys = False  # Keep output sorted when using jsonify
 # Initialize BERT model
 model = BERT_Model(pd.read_pickle("./data/module_details_labelled.pkl"), pd.read_pickle("./data/job_offers_categorized.pkl"))
