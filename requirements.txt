@@ -11,3 +11,4 @@ scipy
 Flask
 gensim
 scikit-learn
+flask_cors

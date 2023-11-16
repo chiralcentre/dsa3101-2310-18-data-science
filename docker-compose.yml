@@ -13,4 +13,10 @@ services:
       - type: bind
         source: ./backend/data
         target: /app/data
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend_dockerfile
+    ports:
+      - "3000:3000"
     
