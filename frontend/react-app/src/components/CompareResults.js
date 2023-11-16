@@ -102,14 +102,14 @@ const CompareResults = ({uni1, uni2, course1, course2}) => {
                         label: `${uni1} ${course1}`,
                         backgroundColor: '#FF5D5D50',
                         borderColor: '#FF5D5D',
-                        data:[distribution1[0]['Algorithms and Numerical Methods'], distribution1[0]['Machine Learning'], distribution1[0]['Project Management'], distribution1[0]['Math and Statistics']]
+                        data:[distribution1[0][labels[0]], distribution1[0][labels[1]], distribution1[0][labels[2]], distribution1[0][labels[3]]]
                         // data: dist1
                     },
                     {
                         label: `${uni2} ${course2}`,
                         backgroundColor: '#6792FF50',
                         borderColor: '#6792FF',
-                        data:[distribution2[0]['Algorithms and Numerical Methods'], distribution2[0]['Machine Learning'], distribution2[0]['Project Management'], distribution2[0]['Math and Statistics']]
+                        data:[distribution2[0][labels[0]], distribution2[0][labels[1]], distribution2[0][labels[2]], distribution2[0][labels[3]]]
                         // data: dist2
                     }
                 ],
