@@ -87,8 +87,8 @@ def job_distribution():
     else:
         return jsonify(df[df["job_type"] == job].to_json(orient = "records", index = False))
     
-@app.route("/course-distribution", methods = ["GET"])
-def course_distribution():
+@app.route("/major-distribution", methods = ["GET"])
+def major_distribution():
     df = pd.read_csv("./data/average_topic_distribution_for_majors.csv")
     uni = request.args.get("university", None)
     major = request.args.get("major", None)
