@@ -9,7 +9,7 @@ import json
 app = Flask(__name__)
 app.json.sort_keys = False  # Keep output sorted when using jsonify
 # Initialize BERT model
-model = BERT_Model(pd.read_pickle("./data/module_details_labelled.pkl"), pd.read_pickle("./data/job_offers_categorized.pkl"))
+model = BERT_Model(pd.read_csv("./data/module_details_labelled.csv"), pd.read_csv("./data/job_offers_categorized.csv"))
 
 pd.options.mode.chained_assignment = None  # Suppress SettingWithCopyWarning for pandas
 
@@ -31,7 +31,7 @@ courses_defaults = {"university": ["NUS", "NTU", "SMU"],
 
 @app.route("/modules", methods = ["GET"])
 def modules():
-    df = pd.read_pickle("./data/module_details_labelled.pkl")
+    df = pd.read_csv("./data/module_details_labelled.csv")
     # if no university is specified, return everything
     uni = request.args.get("university", None)
     if uni == None:
@@ -49,7 +49,7 @@ def modules():
 
 @app.route("/jobs", methods = ["GET"])
 def jobs():
-    df = pd.read_pickle("./data/job_offers_categorized.pkl")
+    df = pd.read_csv("./data/job_offers_categorized.csv")
     # if no job is specified, return everything
     job = request.args.get("job", None)
     if job == None:
