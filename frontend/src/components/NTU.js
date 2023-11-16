@@ -6,6 +6,10 @@ const NTU = () => {
             <div className="container-heading">
                 <h1 className="heading-title primary">NTU</h1>
                 <h4 className="heading-subtitle">Nanyang Technological University</h4>
+                <div className="circle-blue left smaller"></div>
+                <div className="circle-purple left smaller"></div>
+                <div className="circle-blue right smaller"></div>
+                <div className="circle-purple right smaller"></div>
             </div>
 
             <div className="container-body">

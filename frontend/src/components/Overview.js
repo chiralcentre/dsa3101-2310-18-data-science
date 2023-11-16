@@ -2,32 +2,59 @@ import { Link } from 'react-router-dom';
 import 'chart.js/auto';
 import { Radar } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Overview = () => {
-    const [uni2, setUni2] = useState("Data Analyst")
-    const [courseList2, setCourseList2] = useState(["Data Science and Analytics", "Business Analytics", "Quantitative Finance", "Statistics", "Data Science and Economics"])
-    const [course2, setCourse2] = useState("")
-    const [display, setDisplay] = useState(false)
-    const history = useHistory()
+    const [jobType, setJobType] = useState("Data Analyst");
+    const [radarData, setRadarData] = useState(null);
+    const [finalRadar, setFinalRadar] = useState(null);
 
-
-    const radar = {
-        labels: ['Finance/Economics', 'Programming/Algorithm', 'Data Analysis/Modelling', 'Statistics'],
-        datasets: [
-            {
-                label: `${uni2} ${course2}`,
-                backgroundColor: '#23377E',
-                borderColor: 'black',
-                data: [0.2, 0.3, 0.1, 0.4]
-            },
-        ],
+    const jobColors = {
+        "Data Analyst": { backgroundColor: 'rgba(35, 55, 126, 0.3)', borderColor: 'rgba(35, 55, 126, 0.8)' },
+        "Data Scientist": { backgroundColor: 'rgba(126, 35, 35, 0.3)', borderColor: 'rgba(126, 35, 35, 0.8)' },
+        "Quantitative Researcher": { backgroundColor: 'rgba(63, 191, 127, 0.3)', borderColor: 'rgba(63, 191, 127, 0.8)' },
+        "Quantitative Analyst": { backgroundColor: 'rgba(242, 201, 76, 0.3)', borderColor: 'rgba(242, 201, 76, 0.8)' },
+        "Business Analyst": { backgroundColor: 'rgba(79, 129, 189, 0.3)', borderColor: 'rgba(79, 129, 189, 0.8)' },
     };
 
-    const option = {
+    useEffect(() => {
+        fetchJobDistribution();
+    }, [jobType]);
 
+    const fetchJobDistribution = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/job-distribution?job=${encodeURIComponent(jobType)}`);
+            const data = await response.json();
+            setRadarData(data);
+
+        } catch (error) {
+            console.error('Error fetching job distribution data:', error);
+        }
     };
 
+    useEffect(() => {
+        if (radarData) {
+            const numericValues = radarData.match(/[-+]?[0-9]*\.?[0-9]+/g);
+            const keys = radarData.match(/"([^"]+)":/g);
+            const numbersList = numericValues.map(Number);
+            const cleanedKeys = keys.map((key) => key.replace(/["":]/g, ''));
+
+            const radar = {
+                labels: cleanedKeys.slice(1) || [],
+                datasets: [
+                    {
+                        label: jobType,
+                        backgroundColor: jobColors[jobType].backgroundColor,
+                        borderColor: jobColors[jobType].borderColor,
+                        data: numbersList || [],
+                    },
+                ],
+            };
+            setFinalRadar(radar);
+        }
+    }, [radarData]);
+
+    const option = {};
 
     return (
         <section>
@@ -36,6 +63,10 @@ const Overview = () => {
                 <p className="heading-subtitle-secondary">
                     Data science is a multidisciplinary field that involves the use of various techniques, algorithms, processes, and systems to extract knowledge and insights from structured and unstructured data.
                 </p>
+                <div className="circle-blue left smaller"></div>
+                <div className="circle-purple left smaller"></div>
+                <div className="circle-blue right smaller"></div>
+                <div className="circle-purple right smaller"></div>
             </div>
 
             <div className="container-body">
@@ -95,19 +126,19 @@ const Overview = () => {
 
                 <div className="overview-inline-block">
 
-                <div className="overview-inline-item-3">
-                    <img src="img/overview-4.png" className='overview-img4' />
-                </div>
+                    <div className="overview-inline-item-3">
+                        <img src="img/overview-4.png" className='overview-img4' />
+                    </div>
 
-                <div className="overview-inline-item-4">
-                    <p className="overview-number-2">04</p>
-                    <p className="overview-cluster-header-2">Project Management</p>
-                    <p className="overview-inline-text-2">
-                        Project management skills are essential for ensuring that data science projects are successfully executed. This includes effective project planning, scoping, resource allocation, and timely completion of objectives. Communication and collaboration are equally critical, as data scientists often work in interdisciplinary teams, necessitating the ability to convey complex technical concepts to non-technical stakeholders and ensuring that data insights are effectively communicated and applied for informed decision-making.
-                    </p>
-                </div>
+                    <div className="overview-inline-item-4">
+                        <p className="overview-number-2">04</p>
+                        <p className="overview-cluster-header-2">Project Management</p>
+                        <p className="overview-inline-text-2">
+                            Project management skills are essential for ensuring that data science projects are successfully executed. This includes effective project planning, scoping, resource allocation, and timely completion of objectives. Communication and collaboration are equally critical, as data scientists often work in interdisciplinary teams, necessitating the ability to convey complex technical concepts to non-technical stakeholders and ensuring that data insights are effectively communicated and applied for informed decision-making.
+                        </p>
+                    </div>
 
-            </div>
+                </div>
 
                 <h2 className="subheading-title center"> Explore the universities and its majors below! </h2>
 
@@ -125,7 +156,7 @@ const Overview = () => {
 
                 <div className="overview-dropdown dropdown center">
                     <form>
-                        <select value={uni2} onChange={(e) => { setUni2(e.target.value) }}>
+                        <select value={jobType} onChange={(e) => { setJobType(e.target.value) }}>
                             <option value="Data Analyst">Data Analyst</option>
                             <option value="Data Scientist">Data Scientist</option>
                             <option value="Quantitative Researcher">Quantitative Researcher</option>
@@ -136,9 +167,13 @@ const Overview = () => {
                 </div>
 
                 <div className="result">
-                    <div className="chart">
-                        <Radar data={radar} options={option} />
-                    </div>
+                    {radarData ? (
+                        <div className="chart">
+                            {finalRadar && <Radar data={finalRadar} options={option} />}
+                        </div>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
                 </div>
             </div>
         </section >

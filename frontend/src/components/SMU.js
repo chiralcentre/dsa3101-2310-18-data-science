@@ -6,6 +6,10 @@ const SMU = () => {
             <div className="container-heading">
                 <h1 className="heading-title primary">SMU</h1>
                 <h4 className="heading-subtitle">Singapore Management University</h4>
+                <div className="circle-blue left smaller"></div>
+                <div className="circle-purple left smaller"></div>
+                <div className="circle-blue right smaller"></div>
+                <div className="circle-purple right smaller"></div>
             </div>
 
             <div className="container-body">

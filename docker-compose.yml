@@ -19,5 +19,7 @@ services:
       dockerfile: frontend_dockerfile
     ports:
       - "3000:3000"
+    environment:
+      - watchpack_polling=true
 
     

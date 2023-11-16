@@ -42,7 +42,7 @@ const Compare = () => {
                 setCourseList2(["Data Science and Artificial Intelligence", "Economics and Data Science"])
                 setCourse2("Data Science and Artificial Intelligence")
             } if (uni2 === "SMU") {
-                setCourseList2(["Quantitative Finance", "Data Science and Analytics", "Information Systems(Business Analytics)"])
+                setCourseList2(["Quantitative Finance", "Data Science and Analytics", "Information Systems (Business Analytics)"])
                 setCourse2("Quantitative Finance")
             }
         }
@@ -62,6 +62,10 @@ const Compare = () => {
             <div className="container-heading">
                 <h1 className="heading-title secondary">Compare Data Science Courses</h1>
                 <p className="heading-subtitle-secondary">No more hassle in comparing data science courses from multiple resources. Try our comparison feature to discern the differences between two data science courses seamlessly.</p>
+                <div className="circle-blue left smaller"></div>
+                <div className="circle-purple left smaller"></div>
+                <div className="circle-blue right smaller"></div>
+                <div className="circle-purple right smaller"></div>
             </div>
 
             <div className="container-body margin-bottom">

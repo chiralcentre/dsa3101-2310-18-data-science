@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <section>
             <div className="container-heading wide-padding">
-                <h1 className="heading-title primary"> Data Guru</h1>
+                <h1 className="heading-title primary"> Data Guru </h1>
                 <p className="heading-subtitle"> Your Guide to Data Science Education </p>
                 <div className="circle-blue left"></div>
                 <div className="circle-purple left"></div>
