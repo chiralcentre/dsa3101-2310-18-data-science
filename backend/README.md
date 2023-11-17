@@ -31,6 +31,7 @@ backend
 ├───bert-base-uncased
 ├───data
 │   └───majors_info
+│   └───outputs
 ├───Questions
 ├───Scripts
 ```
@@ -39,7 +40,7 @@ backend
 - `lda.py` is the code for LDA model, used to perform topic modelling and generate topic distribution given any piece of text.
 - `similarity_measure.py` is the code for BERT model, used to perform similarity comparisons between course/job descriptions.
 - `bert-base-uncased` is the model cloned using `git clone` command previously.
-- `data` stores the raw datasets. It's the output folder for webscraping scripts and input folder for models.
+- `data` stores the raw datasets. It's the output folder for webscraping scripts and input folder for models. `data/outputs` is where model outputs autosave to.
 - `Questions` contains the question bank used for the quiz feature.
 - `Scripts` contains helper scripts not automatically run by the main programs. These include course and job description scraping scripts, as well as code used for model testing and evaluation in `.ipynb` files. 
 
