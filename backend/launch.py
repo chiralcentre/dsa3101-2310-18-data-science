@@ -22,7 +22,7 @@ university_mappings = {"NUS": ["Data Science and Analytics", "Business Analytics
 
 job_types = ['Data Analyst', 'Data Scientist', 'Quantitative Researcher', 'Quantitative Analyst', 'Business Analyst']
 
-clusters = ["Math-based Optimization (ML)", "Mathematical and Statistical Analysis (Theory-based)", "Project Management", "Machine Learning"]
+clusters = ["Project Management", "Algorithms and Numerical Methods", "Machine Learning", "Math and Statistics"]
 
 lda_model, doc_term_matrix, dictionary, lemmatized_stuff = process_input_file("./data/module_details_labelled.csv")
 
