@@ -12,3 +12,4 @@ Flask
 gensim
 scikit-learn
 flask_cors
+pytest
