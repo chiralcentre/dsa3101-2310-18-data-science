@@ -3,3 +3,4 @@ __pycache__
 backend/__pycache__
 backend/bert*
 backend/scibert*
+frontend/node_modules
