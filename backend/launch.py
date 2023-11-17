@@ -114,11 +114,11 @@ def quiz_questions():
 def quiz_results():
     df = pd.read_csv("./data/average_topic_distribution_for_majors.csv")
     answers = request.json
-    if answers == None:
+    if not isinstance(answers, dict):
         return make_response("number of questions selected for each question category required", 400)
     keys = {int(k) for k in answers}
     if keys != set(topic_labels.keys()): 
-        return make_response("Invalid topic indices", 400)
+        return make_response("invalid topic indices", 400)
     total = sum(answers.values())
     quiz_distribution = [0,0,0,0]
     for key in answers:
@@ -132,7 +132,6 @@ def quiz_results():
     best.sort(key = lambda x: x[2])
     return jsonify(best[:3])
 
-
 @app.route("/analysis/similar_courses", methods=["GET"])
 # localhost:5000/analysis/similar_courses?university=NUS&major=Data Science and Analytics&course_code=CS2040&course_name=Data Structures and Algorithms
 def model_get_similar_courses():
@@ -141,7 +140,7 @@ def model_get_similar_courses():
     course_code = request.args.get("course_code", None)
     course_name = request.args.get("course_name", None)
     if None in (school, major, course_code, course_name):
-        return "Please input all course details - school, major, course_code, course_name"
+        return make_response("Please input all course details - school, major, course_code, course_name",400)
     limit = int(request.args.get("limit", -1))
     threshold = float(request.args.get("threshold", 0.0))  # Between 0 and 1. Higher means more similar
     course_types = request.args.get("course_types", "All")  # "Core Elective GE" or "All"
@@ -181,7 +180,7 @@ def model_get_similar_courses_from_job_desc():
 def model_get_similar_courses_from_job_type():
     job_type = request.args.get("job_type", None)
     if not job_type:
-        return "Please input job_type"
+        return make_response("Please input job_type",400)
     limit = int(request.args.get("limit", -1))
     threshold = float(request.args.get("threshold", 0.0))  # Between 0 and 1. Higher means more similar
     course_types = request.args.get("course_types", "All")  # "Core Elective GE" or "All"
@@ -203,7 +202,7 @@ def model_compare_programs():
     school = request.args.get("university", None)
     major = request.args.get("major", None)
     if None in (school, major):
-        return "Please input school and major"
+        return make_response("Please input school and major",400)
     min_similarity = float(request.args.get("min_similarity", 0.93))  # Between 0 and 1. Higher means more similar
     course_types = request.args.get("course_types", "All")  # "Core Elective GE" or "All"
     if course_types != "All":
