@@ -25,3 +25,5 @@ A DSA3101 group project of the topic "What is Data Science?"
     The first boot up will take some time (~15 min) so just be patient please. 
     
     Note that the backend models will need some additional time (~3min) to initialize even after the docker containers started running. 
+
+5. Access the DataGuru website via `http://localhost:3000/` and the backend API via `http://localhost:5000/`. 
