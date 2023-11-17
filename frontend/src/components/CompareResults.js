@@ -8,7 +8,7 @@ const CompareResults = ({uni1, uni2, course1, course2}) => {
     const [data1, setData1] = useState(null)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/course-distribution?university=${uni1}&major=${course1}`)
+        fetch(`http://localhost:5000/major-distribution?university=${uni1}&major=${course1}`)
         .then(res => {
             return res.json()
         })
@@ -18,7 +18,7 @@ const CompareResults = ({uni1, uni2, course1, course2}) => {
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/course-distribution?university=${uni2}&major=${course2}`)
+        fetch(`http://localhost:5000/major-distribution?university=${uni2}&major=${course2}`)
         .then(res => {
             return res.json()
         })
