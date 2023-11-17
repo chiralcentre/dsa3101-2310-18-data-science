@@ -1,6 +1,6 @@
 # DataGuru
 
-A DSA3101 group project of the topic "What is Data Science?"
+A DSA3101 group project for the topic "What is Data Science?"
 
 ## Usage
 
@@ -12,9 +12,9 @@ A DSA3101 group project of the topic "What is Data Science?"
 
 2. Install Docker. Refer to the following guides for instructions.
 
-- [Windows](https://docs.docker.com/windows/started)
-- [OS X](https://docs.docker.com/mac/started/)
-- [Linux](https://docs.docker.com/linux/started/)
+   - [Windows](https://docs.docker.com/windows/started)
+   - [OS X](https://docs.docker.com/mac/started/)
+   - [Linux](https://docs.docker.com/linux/started/)
 
 3. Once installed, start Docker and make sure the Docker Engine is running successfully. 
 
@@ -27,3 +27,4 @@ A DSA3101 group project of the topic "What is Data Science?"
     Note that the backend models will need some additional time (~3min) to initialize even after the docker containers started running. 
 
 5. Access the DataGuru website via `http://localhost:3000/` and the backend API via `http://localhost:5000/`. 
+
